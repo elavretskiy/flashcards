@@ -9,20 +9,20 @@
 </head>
 
 <body>
-<section id="container">
+<div class="container" id="wrapper">
 
-  <header class="clearfix">
-    <h1>Флэшкарточкер</h1>
-    <ul class="navigation-links">
-      <li><a href="#">Все карточки</a></li>
-      <li><a href="#">Добавить карточку</a></li>
-    </ul>
-  </header>
+  <div class="row" id="header">
+    <div class="col-sm-12">
+      <%= render 'indexes/header' %>
+    </div>
+  </div>
 
-  <section>
-    <%= yield %>
-  </section>
+  <div class="row" id="middle">
+    <div class="col-sm-12">
+      <%= yield %>
+    </div>
+  </div>
 
-</section>
+</div>
 </body>
 </html>
