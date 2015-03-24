@@ -4,22 +4,23 @@ class CardsController < ApplicationController
 
   def index
     @cards = Card.all
-    respond_with(@cards)
+    respond_with @cards
   end
 
   def new
     @card = Card.new
-    respond_with(@card)
+    respond_with @card
   end
 
   def create
     @card = Card.new(card_params)
-    (@card.save) ? (redirect_to action: :index) : respond_with(@card)
+    @card.save ? (redirect_to action: :index) :
+        (respond_with @card)
   end
 
   def destroy
     @card.destroy
-    respond_with(@card)
+    respond_with @card
   end
 
   private
