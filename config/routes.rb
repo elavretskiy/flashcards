@@ -55,4 +55,5 @@ Rails.application.routes.draw do
   #   end
 
   root 'home#index'
+  resources :cards, only: [:create, :new, :index, :destroy]
 end
