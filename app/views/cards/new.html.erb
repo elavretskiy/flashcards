@@ -1,30 +1,30 @@
 <h2>Добавить карточку</h2>
 
 <%= form_for @card do |f| %>
-	<% if @card.errors.any? %>
-		<div id="error_explanation" class="alert alert-warning">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-			<ul>
-				<% @card.errors.full_messages.each do |message| %>
-					<li><%= message %></li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
+  <% if @card.errors.any? %>
+    <div id="error_explanation" class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <ul>
+        <% @card.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-	<div class="form-group">
-		<%= f.label 'Original' %><br>
-		<%= f.text_field :original, class: 'form-control', autofocus: true, required: true %>
-	</div>
+  <div class="form-group">
+    <%= f.label 'Original' %><br>
+    <%= f.text_field :original, class: 'form-control', autofocus: true, required: true %>
+  </div>
 
-	<div class="form-group">
-		<%= f.label 'Translated' %><br>
-		<%= f.text_field :translated, class: 'form-control', required: true %>
-	</div>
+  <div class="form-group">
+    <%= f.label 'Translated' %><br>
+    <%= f.text_field :translated, class: 'form-control', required: true %>
+  </div>
 
-	<div class="actions">
-		<%= f.submit 'Сохранить', class: 'btn btn-default' %>
-	</div>
+  <div class="actions">
+    <%= f.submit 'Сохранить', class: 'btn btn-default' %>
+  </div>
 <% end %>

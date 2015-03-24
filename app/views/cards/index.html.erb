@@ -9,12 +9,12 @@
   </thead>
   <tbody>
   <% @cards.each do |card| %>
-      <tr class="table table-hover table-condensed">
-        <td><%= card.original %></td>
-        <td><%= card.translated %></td>
-        <td><%= (card.review) ? card.review.strftime('%d/%m/%Y') : card.review %></td>
-        <td><%= link_to 'Удалить', card, method: :delete, data: { confirm: 'Удалить запись?' } %></td>
-      </tr>
+    <tr class="table table-hover table-condensed">
+      <td><%= card.original %></td>
+      <td><%= card.translated %></td>
+      <td><%= (card.review) ? card.review.strftime('%d/%m/%Y') : card.review %></td>
+      <td><%= link_to 'Удалить', card, method: :delete, data: { confirm: 'Удалить запись?' } %></td>
+    </tr>
   <% end %>
   </tbody>
 </table>
