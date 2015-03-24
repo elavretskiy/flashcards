@@ -14,8 +14,11 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
-    @card.save ? (redirect_to action: :index) :
-        (respond_with @card)
+    if @card.save
+      redirect_to cards_path
+    else
+      respond_with @card
+    end
   end
 
   def destroy
