@@ -13,26 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
-#container {
-    margin: 48px auto;
-    width: 960px;
-}
-
-#container > section {
-    clear: both;
-}
-
-#container > header {
-    margin-bottom: 46px;
-}
-
-#container > header > h1 {
-    float: left;
-    margin: 0;
-}
-
-.navigation-links li {
-    display: inline-block;
-    margin: 0 16px;
-}
