@@ -1,11 +1,11 @@
-<%= form_for @card do |f| %>
-  <% if @card.errors.any? %>
+<%= form_for card do |f| %>
+  <% if card.errors.any? %>
     <div id="error_explanation" class="alert alert-warning">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
       <ul>
-        <% @card.errors.full_messages.each do |message| %>
+        <% card.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
