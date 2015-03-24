@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Flashcards</title>
+  <title>Флэшкарточкер</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
+<div class="container" id="wrapper">
 
-<%= yield %>
+  <%= render 'shared/header' %>
 
+  <div class="row" id="middle">
+    <div class="col-sm-12">
+      <%= yield %>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>
