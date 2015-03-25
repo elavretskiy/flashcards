@@ -1,15 +1,15 @@
 class Card < ActiveRecord::Base
   before_validation :set_review_date, on: :create
+  before_save :set_downcase_text
   validate :original_translated_text_equal
   validates :original_text, :translated_text, :review_date,
             presence: { message: 'Необходимо заполнить поле.' }
 
-  scope :review_card, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
+  scope :pending, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
 
   def check_user_translation(user_translation)
     if translated_text == user_translation.downcase
-      set_review_date
-      self.save
+      update_attributes(review_date: Time.now + 3.days)
     end
   end
 
@@ -19,14 +19,17 @@ class Card < ActiveRecord::Base
   end
 
   def original_translated_text_equal
-    self.original_text = full_downcase(original_text)
-    self.translated_text = full_downcase(translated_text)
-    if original_text == translated_text
+    if full_downcase(original_text) == full_downcase(translated_text)
       errors.add(:original_text, 'Вводимые значения должны отличаться.')
     end
   end
 
   def full_downcase(str)
     str.mb_chars.downcase.to_s.squeeze(' ').lstrip
+  end
+
+  def set_downcase_text
+    self.original_text = full_downcase(original_text)
+    self.translated_text = full_downcase(translated_text)
   end
 end

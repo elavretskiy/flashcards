@@ -55,7 +55,6 @@ Rails.application.routes.draw do
   #   end
 
   root 'home#index'
-  resources :cards do
-      patch 'trainer/review', on: :member, path: 'review'
-  end
+  resources :cards
+  post 'trainer/review', path: 'review'
 end
