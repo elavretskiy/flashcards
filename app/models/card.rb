@@ -1,21 +1,18 @@
 class Card < ActiveRecord::Base
-  before_validation :set_review
-  validate :check_original_translated_equal
-  validates :original, presence: true
-  validates :translated, presence: true
-  validates :review, presence: true
+  before_validation :set_review_date, on: :create
+  validate :original_translated_text_equal
+  validates :original_text, :translated_text, :review_date, presence: true
 
   protected
-    def set_review
-      self.review = Time.now + 3.days
+    def set_review_date
+      self.review_date = Time.now + 3.days
     end
 
-    def check_original_translated_equal
-      self.original = original.mb_chars.downcase.to_s.squeeze(' ').lstrip
-      self.translated = translated.mb_chars.downcase.to_s.squeeze(' ').lstrip
-      if original == translated
-        errors.add(:original,
-                   ' = Translated. Вводимые значения должны отличаться.')
+    def original_translated_text_equal
+      self.original_text = original_text.mb_chars.downcase.to_s.squeeze(' ').lstrip
+      self.translated_text = translated_text.mb_chars.downcase.to_s.squeeze(' ').lstrip
+      if original_text == translated_text
+        errors.add(:original_text, ' = Translated text. Вводимые значения должны отличаться.')
       end
     end
 end
