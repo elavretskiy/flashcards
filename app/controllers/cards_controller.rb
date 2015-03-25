@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:destroy]
+  before_action :set_card, only: [:destroy, :edit, :update]
   respond_to :html
 
   def index
@@ -12,9 +12,20 @@ class CardsController < ApplicationController
     respond_with @card
   end
 
+  def edit
+  end
+
   def create
     @card = Card.new(card_params)
     if @card.save
+      redirect_to cards_path
+    else
+      respond_with @card
+    end
+  end
+
+  def update
+    if @card.update(card_params)
       redirect_to cards_path
     else
       respond_with @card
@@ -32,6 +43,6 @@ class CardsController < ApplicationController
     end
 
     def card_params
-      params.require(:card).permit(:original, :translated, :review)
+      params.require(:card).permit(:original_text, :translated_text, :review_date)
     end
 end

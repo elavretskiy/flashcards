@@ -4,15 +4,16 @@
     <th>Original</th>
     <th>Translated</th>
     <th>Review</th>
-    <th colspan="1"></th>
+    <th colspan="2"></th>
   </tr>
   </thead>
   <tbody>
   <% @cards.each do |card| %>
     <tr class="table table-hover table-condensed">
-      <td><%= card.original %></td>
-      <td><%= card.translated %></td>
-      <td><%= (card.review) ? card.review.strftime('%d/%m/%Y') : card.review %></td>
+      <td><%= card.original_text %></td>
+      <td><%= card.translated_text %></td>
+      <td><%= card.review_date.strftime('%d/%m/%Y') %></td>
+      <td><%= link_to 'Редактировать', edit_card_path(card) %></td>
       <td><%= link_to 'Удалить', card, method: :delete, data: { confirm: 'Удалить запись?' } %></td>
     </tr>
   <% end %>
