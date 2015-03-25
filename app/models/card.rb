@@ -4,6 +4,11 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, :review_date,
             presence: { message: 'Необходимо заполнить поле.' }
 
+  scope :review_card, -> { where('review_date <= ?', Time.now.strftime('%Y-%m-%d')).order('RANDOM()') }
+
+  def check_user_translation(user_translation)
+    self.review_date = Time.now + 3.days if translated_text == user_translation.downcase
+  end
   protected
     def set_review_date
       self.review_date = Time.now + 3.days
@@ -20,7 +25,4 @@ class Card < ActiveRecord::Base
     def full_downcase(str)
       str.mb_chars.downcase.to_s.squeeze(' ').lstrip
     end
-
-    scope :review_date_card, -> { where('review_date <= ?', Time.now.strftime('%Y-%m-%d')).
-        select(:id, :original_text).order('RANDOM()').first }
 end
