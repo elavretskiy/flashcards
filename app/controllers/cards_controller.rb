@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:destroy, :edit, :update]
+  before_action :set_card, only: [:destroy, :edit, :update, :check_words]
   respond_to :html
 
   def index
@@ -35,6 +35,18 @@ class CardsController < ApplicationController
   def destroy
     @card.destroy
     respond_with @card
+  end
+
+  def check_words
+    if @card.translated_text == card_params[:translated_text].downcase
+      @card.review_date = Time.now + 3.days
+      @card.save
+      flash[:alert] = 'Вы ввели верный перевод. Продолжайте.'
+      redirect_to controller: :home, action: :index
+    else
+      flash[:alert] = 'Вы ввели не верный перевод. Повторите попытку.'
+      render '/home/index'
+    end
   end
 
   private
