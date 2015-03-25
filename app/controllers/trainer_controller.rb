@@ -3,22 +3,21 @@ class TrainerController < ApplicationController
   respond_to :html
 
   def review
-    if @card.check_user_translation(params[:user_translation])
-      @card.save
+    if @card.check_user_translation(trainer_params[:user_translation])
       flash[:alert] = 'Вы ввели верный перевод. Продолжайте.'
       redirect_to root_path
     else
       flash[:alert] = 'Вы ввели не верный перевод. Повторите попытку.'
-      render '/home/index_form'
+      redirect_to root_path(card_id: @card.id)
     end
   end
 
   private
   def set_card
-    @card = Card.find(params[:card_id])
+    @card = Card.find(params[:id])
   end
 
-  def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date)
+  def trainer_params
+    params.permit(:user_translation)
   end
 end

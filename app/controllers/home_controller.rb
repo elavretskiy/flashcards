@@ -3,6 +3,6 @@ class HomeController < ApplicationController
 
   def index
     @card = Card.review_card.first
-    @card ? (render :index_form) : (render :index)
+    render :index
   end
 end
