@@ -1,28 +1,23 @@
-<%= form_for card do |f| %>
+<%= simple_form_for card do |f| %>
   <% if card.errors.any? %>
     <div id="error_explanation" class="alert alert-warning">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <ul>
-        <% card.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+      <%= f.error :original_text %>
+      <%= f.error :translated_text %>
     </div>
   <% end %>
 
   <div class="form-group">
-    <%= f.label 'Original' %><br>
-    <%= f.text_field :original_text, class: 'form-control', autofocus: true, required: true %>
+    <%= f.input :original_text,  as: :text, label: 'Original text',
+                input_html: { class: 'form-control', required: true, autofocus: true } %>
   </div>
 
   <div class="form-group">
-    <%= f.label 'Translated' %><br>
-    <%= f.text_field :translated_text, class: 'form-control', required: true %>
+    <%= f.input :translated_text,  as: :text, label: 'Translated text',
+                input_html: { class: 'form-control', required: true } %>
   </div>
 
-  <div class="actions">
-    <%= f.submit 'Сохранить', class: 'btn btn-default' %>
-  </div>
+  <%= f.button :submit, 'Сохранить', class: 'btn btn-default' %>
 <% end %>
