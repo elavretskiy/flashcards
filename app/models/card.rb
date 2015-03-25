@@ -9,6 +9,7 @@ class Card < ActiveRecord::Base
   def check_user_translation(user_translation)
     self.review_date = Time.now + 3.days if translated_text == user_translation.downcase
   end
+
   protected
     def set_review_date
       self.review_date = Time.now + 3.days

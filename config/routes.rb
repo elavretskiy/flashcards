@@ -56,6 +56,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
   resources :cards do
-    patch 'check_words', on: :member
+    resources :trainer, only: [:review] do
+      patch 'review', on: :collection
+    end
   end
 end
