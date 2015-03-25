@@ -1,5 +1,5 @@
 class Card < ActiveRecord::Base
-  before_validation :set_review_date, on: [:create]
+  before_validation :set_review_date, on: :create
   validate :original_translated_text_equal
   validates :original_text, :translated_text, :review_date,
             presence: { message: 'Необходимо заполнить поле.' }
@@ -7,7 +7,7 @@ class Card < ActiveRecord::Base
   scope :review_card, -> { where('review_date <= ?', Time.now.strftime('%Y-%m-%d')).order('RANDOM()') }
 
   def check_user_translation(user_translation)
-    self.review_date = Time.now + 3.days if translated_text == user_translation.downcase
+    set_review_date if translated_text == user_translation.downcase
   end
 
   protected
