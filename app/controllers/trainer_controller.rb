@@ -8,7 +8,7 @@ class TrainerController < ApplicationController
       redirect_to root_path
     else
       flash[:alert] = 'Вы ввели не верный перевод. Повторите попытку.'
-      render 'home/index'
+      redirect_to root_path(id: @card.id)
     end
   end
 
