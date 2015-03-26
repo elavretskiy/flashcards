@@ -1,5 +1,7 @@
 == README
 
+https://travis-ci.org/elavretskiy/flashcards.svg?branch=seventh-task
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

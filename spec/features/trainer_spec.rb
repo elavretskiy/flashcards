@@ -7,27 +7,27 @@ describe "training without cards" do
   end
 
   it 'no cards' do
-    visit '/'
+    visit root_path
     expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
   end
 end
 
 describe "training with some cards" do
-  before :each do
+  before :all do
     Card.destroy_all
     card = Card.create(original_text: 'дом', translated_text: 'house')
     card.update_attribute(:review_date, Time.now)
-    card = Card.create(original_text: 'машина', translated_text: 'car')
+    card = Card.create(original_text: 'дом', translated_text: 'house')
     card.update_attribute(:review_date, Time.now)
   end
 
   it 'first visit' do
-    visit '/'
+    visit root_path
     expect(page).to have_content 'Original text'
   end
 
   it 'incorrect translation' do
-    visit '/'
+    visit root_path
     fill_in 'user_translation', with: 'RoR'
     click_button 'Проверить'
     expect(page).
@@ -35,7 +35,7 @@ describe "training with some cards" do
   end
 
   it 'correct translation' do
-    visit '/'
+    visit root_path
     fill_in 'user_translation', with: 'house'
     click_button 'Проверить'
     expect(page).to have_content 'Вы ввели верный перевод. Продолжайте.'
@@ -50,12 +50,12 @@ describe "training with one card" do
   end
 
   it 'first visit' do
-    visit '/'
+    visit root_path
     expect(page).to have_content 'Original text'
   end
 
   it 'incorrect translation' do
-    visit '/'
+    visit root_path
     fill_in 'user_translation', with: 'RoR'
     click_button 'Проверить'
     expect(page).
@@ -63,7 +63,7 @@ describe "training with one card" do
   end
 
   it 'correct translation' do
-    visit '/'
+    visit root_path
     fill_in 'user_translation', with: 'house'
     click_button 'Проверить'
     expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
