@@ -56,4 +56,5 @@ Rails.application.routes.draw do
 
   root 'home#index'
   resources :cards
+  put 'review' => 'trainer#review'
 end
