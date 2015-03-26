@@ -41,3 +41,6 @@ gem 'pg'
 gem 'simple_form'
 gem 'nokogiri'
 gem 'seedbank'
+group :development, :test do
+  gem 'rspec-rails'
+end
