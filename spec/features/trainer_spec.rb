@@ -47,7 +47,6 @@ describe "training with one card" do
     Card.destroy_all
     card = Card.create(original_text: 'дом', translated_text: 'house')
     card.update_attribute(:review_date, Time.now)
-    card = Card.pending.first
   end
 
   it 'first visit' do
