@@ -43,4 +43,6 @@ gem 'nokogiri'
 gem 'seedbank'
 group :development, :test do
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'factory_girl'
 end
