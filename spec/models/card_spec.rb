@@ -8,61 +8,61 @@ RSpec.describe Card, type: :model do
 
   it 'create card with empty translated text' do
     card = Card.create(original_text: 'дом', translated_text: '')
-    expect(card.errors[:translated_text])
-        .to include('Необходимо заполнить поле.')
+    expect(card.errors[:translated_text]).
+        to include('Необходимо заполнить поле.')
   end
 
   it 'create card with empty texts' do
     card = Card.create(original_text: '', translated_text: '')
-    expect(card.errors[:original_text])
-        .to include('Вводимые значения должны отличаться.')
+    expect(card.errors[:original_text]).
+        to include('Вводимые значения должны отличаться.')
     expect(card.errors[:original_text]).to include("Необходимо заполнить поле.")
-    expect(card.errors[:translated_text])
-        .to include("Необходимо заполнить поле.")
+    expect(card.errors[:translated_text]).
+        to include("Необходимо заполнить поле.")
   end
 
   it 'equal_texts Eng' do
     card = Card.create(original_text: 'house', translated_text: 'house')
-    expect(card.errors[:original_text])
-        .to include('Вводимые значения должны отличаться.')
+    expect(card.errors[:original_text]).
+        to include('Вводимые значения должны отличаться.')
   end
 
   it 'equal_texts Rus' do
     card = Card.create(original_text: 'дом', translated_text: 'дом')
-    expect(card.errors[:original_text])
-        .to include('Вводимые значения должны отличаться.')
+    expect(card.errors[:original_text]).
+        to include('Вводимые значения должны отличаться.')
   end
 
   it 'full_downcase Eng' do
     card = Card.create(original_text: 'hOuse', translated_text: 'houSe')
-    expect(card.errors[:original_text])
-        .to include('Вводимые значения должны отличаться.')
+    expect(card.errors[:original_text]).
+        to include('Вводимые значения должны отличаться.')
   end
 
   it 'full_downcase Rus' do
     card = Card.create(original_text: 'Дом', translated_text: 'доМ')
-    expect(card.errors[:original_text])
-        .to include('Вводимые значения должны отличаться.')
+    expect(card.errors[:original_text]).
+        to include('Вводимые значения должны отличаться.')
   end
 
   it 'create card OK' do
     card = Card.create(original_text: 'дом', translated_text: 'house')
-    expect(card.errors[:original_text])
-        .to_not include('Вводимые значения должны отличаться.')
-    expect(card.errors[:translated_text])
-        .to_not include("Необходимо заполнить поле.")
-    expect(card.errors[:original_text])
-        .to_not include("Необходимо заполнить поле.")
+    expect(card.errors[:original_text]).
+        to_not include('Вводимые значения должны отличаться.')
+    expect(card.errors[:translated_text]).
+        to_not include("Необходимо заполнить поле.")
+    expect(card.errors[:original_text]).
+        to_not include("Необходимо заполнить поле.")
     expect(card.translated_text).to eq('house')
     expect(card.original_text).to eq('дом')
   end
 
   it 'set_review_date OK' do
     card = Card.create(original_text: 'дом', translated_text: 'house')
-    expect(card.errors[:review_date])
-        .to_not include("Необходимо заполнить поле.")
-    expect(card.review_date.to_s)
-        .to eq((Time.now + 3.days).strftime('%Y-%m-%d'))
+    expect(card.errors[:review_date]).
+        to_not include("Необходимо заполнить поле.")
+    expect(card.review_date.to_s).
+        to eq((Time.now + 3.days).strftime('%Y-%m-%d'))
   end
 
   it 'check_translation Eng OK' do
