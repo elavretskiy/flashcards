@@ -70,7 +70,7 @@ describe Card do
 
   it 'check_translation Eng NOT' do
     card = Card.create(original_text: 'дом', translated_text: 'house')
-    expect(card.check_translation('RoR')).to be nil
+    expect(card.check_translation('RoR')).to be false
   end
 
   it 'check_translation Rus OK' do
@@ -80,7 +80,7 @@ describe Card do
 
   it 'check_translation Rus NOT' do
     card = Card.create(original_text: 'house', translated_text: 'дом')
-    expect(card.check_translation('RoR')).to be nil
+    expect(card.check_translation('RoR')).to be false
   end
 
   it 'check_translation full_downcase Eng OK' do
@@ -90,7 +90,7 @@ describe Card do
 
   it 'check_translation full_downcase Eng NOT' do
     card = Card.create(original_text: 'ДоМ', translated_text: 'hOuSe')
-    expect(card.check_translation('RoR')).to be nil
+    expect(card.check_translation('RoR')).to be false
   end
 
   it 'check_translation full_downcase Rus OK' do
@@ -100,6 +100,6 @@ describe Card do
 
   it 'check_translation full_downcase Rus NOT' do
     card = Card.create(original_text: 'hOuSe', translated_text: 'ДоМ')
-    expect(card.check_translation('RoR')).to be nil
+    expect(card.check_translation('RoR')).to be false
   end
 end
