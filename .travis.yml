@@ -1,10 +1,6 @@
 language: ruby
-rvm:
-  - 2.1.5
-env:
-  - RAILS_ENV=test
+rvm: 2.1.5
+env: RAILS_ENV=test
 script:
-  - bundle exec rake spec:travis
-  - bundle exec rake db:schema:load
-  - bundle exec rake db:test:prepare
-  - bundle exec rake spec
+  - generate rspec:install
+  - bundle exec rspec
