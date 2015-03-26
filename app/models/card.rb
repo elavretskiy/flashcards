@@ -1,6 +1,6 @@
 class Card < ActiveRecord::Base
   before_validation :set_review_date, on: :create
-  validate :equal_texts
+  validate :original_translated_equal
   validates :original_text, :translated_text, :review_date,
             presence: { message: 'Необходимо заполнить поле.' }
 
@@ -17,8 +17,8 @@ class Card < ActiveRecord::Base
     self.review_date = Time.now + 3.days
   end
 
-  def equal_texts
-    if full_downcase(original_text) == full_downcase(translated_text)
+  def original_translated_equal
+  if full_downcase(original_text) == full_downcase(translated_text)
       errors.add(:original_text, 'Вводимые значения должны отличаться.')
     end
   end

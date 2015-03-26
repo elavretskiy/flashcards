@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Card, type: :model do
+describe Card do
   it 'create card with empty original text' do
     card = Card.create(original_text: '', translated_text: 'house')
     expect(card.errors[:original_text]).to include('Необходимо заполнить поле.')
@@ -16,9 +16,6 @@ RSpec.describe Card, type: :model do
     card = Card.create(original_text: '', translated_text: '')
     expect(card.errors[:original_text]).
         to include('Вводимые значения должны отличаться.')
-    expect(card.errors[:original_text]).to include("Необходимо заполнить поле.")
-    expect(card.errors[:translated_text]).
-        to include("Необходимо заполнить поле.")
   end
 
   it 'equal_texts Eng' do
@@ -45,22 +42,23 @@ RSpec.describe Card, type: :model do
         to include('Вводимые значения должны отличаться.')
   end
 
-  it 'create card OK' do
+  it 'create card original_text OK' do
     card = Card.create(original_text: 'дом', translated_text: 'house')
-    expect(card.errors[:original_text]).
-        to_not include('Вводимые значения должны отличаться.')
-    expect(card.errors[:translated_text]).
-        to_not include("Необходимо заполнить поле.")
-    expect(card.errors[:original_text]).
-        to_not include("Необходимо заполнить поле.")
-    expect(card.translated_text).to eq('house')
     expect(card.original_text).to eq('дом')
+  end
+
+  it 'create card translated_text OK' do
+    card = Card.create(original_text: 'дом', translated_text: 'house')
+    expect(card.translated_text).to eq('house')
+  end
+
+  it 'create card errors OK' do
+    card = Card.create(original_text: 'дом', translated_text: 'house')
+    expect(card.errors.any?).to be false
   end
 
   it 'set_review_date OK' do
     card = Card.create(original_text: 'дом', translated_text: 'house')
-    expect(card.errors[:review_date]).
-        to_not include("Необходимо заполнить поле.")
     expect(card.review_date.to_s).
         to eq((Time.now + 3.days).strftime('%Y-%m-%d'))
   end
