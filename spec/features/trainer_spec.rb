@@ -4,7 +4,6 @@ describe "training without cards" do
   before :all do
     Card.destroy_all
     Card.create(original_text: 'дом', translated_text: 'house')
-    @card = Card.pending.first
   end
 
   it 'no cards' do
@@ -16,11 +15,10 @@ end
 describe "training with some cards" do
   before :each do
     Card.destroy_all
-    @card = Card.create(original_text: 'дом', translated_text: 'house')
-    @card.update_attribute(:review_date, Time.now)
-    @card = Card.create(original_text: 'машина', translated_text: 'car')
-    @card.update_attribute(:review_date, Time.now)
-    @card = Card.pending.first
+    card = Card.create(original_text: 'дом', translated_text: 'house')
+    card.update_attribute(:review_date, Time.now)
+    card = Card.create(original_text: 'машина', translated_text: 'car')
+    card.update_attribute(:review_date, Time.now)
   end
 
   it 'first visit' do
@@ -32,7 +30,8 @@ describe "training with some cards" do
     visit '/'
     fill_in 'user_translation', with: 'RoR'
     click_button 'Проверить'
-    expect(page).to have_content 'Вы ввели не верный перевод. Повторите попытку.'
+    expect(page).
+        to have_content 'Вы ввели не верный перевод. Повторите попытку.'
   end
 
   it 'correct translation' do
@@ -46,9 +45,9 @@ end
 describe "training with one card" do
   before :all do
     Card.destroy_all
-    @card = Card.create(original_text: 'дом', translated_text: 'house')
-    @card.update_attribute(:review_date, Time.now)
-    @card = Card.pending.first
+    card = Card.create(original_text: 'дом', translated_text: 'house')
+    card.update_attribute(:review_date, Time.now)
+    card = Card.pending.first
   end
 
   it 'first visit' do
@@ -60,7 +59,8 @@ describe "training with one card" do
     visit '/'
     fill_in 'user_translation', with: 'RoR'
     click_button 'Проверить'
-    expect(page).to have_content 'Вы ввели не верный перевод. Повторите попытку.'
+    expect(page).
+        to have_content 'Вы ввели не верный перевод. Повторите попытку.'
   end
 
   it 'correct translation' do
