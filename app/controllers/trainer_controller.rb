@@ -3,7 +3,7 @@ class TrainerController < ApplicationController
 
   def review
     @card = Card.find(params[:id])
-    if @card.check_user_translation(trainer_params[:user_translation])
+    if @card.check_translation(trainer_params[:user_translation])
       flash[:alert] = 'Вы ввели верный перевод. Продолжайте.'
       redirect_to root_path
     else
