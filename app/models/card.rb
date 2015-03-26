@@ -18,7 +18,7 @@ class Card < ActiveRecord::Base
   end
 
   def original_translated_equal
-  if full_downcase(original_text) == full_downcase(translated_text)
+    if full_downcase(original_text) == full_downcase(translated_text)
       errors.add(:original_text, 'Вводимые значения должны отличаться.')
     end
   end
