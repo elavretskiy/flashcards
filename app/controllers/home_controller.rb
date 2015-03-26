@@ -2,6 +2,10 @@ class HomeController < ApplicationController
   respond_to :html
 
   def index
-    @card = Card.pending(params[:id]).first
+    if params[:id]
+      @card = Card.find(params[:id])
+    else
+      @card = Card.pending.first
+    end
   end
 end
