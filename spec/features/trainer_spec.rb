@@ -2,31 +2,30 @@ require 'rails_helper'
 
 describe "review cards" do
   describe "training without cards" do
-    before :each do
+    before do
       create(:card)
+      visit root_path
     end
 
     it 'no cards' do
-      visit root_path
       expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
     end
   end
 
   describe "training with some cards" do
-    before :each do
-      (0..1).each do
+    before do
+      2.times do
         card = create(:card)
         card.update_attribute(:review_date, Time.now)
+        visit root_path
       end
     end
 
     it 'first visit' do
-      visit root_path
       expect(page).to have_content 'Original text'
     end
 
     it 'incorrect translation' do
-      visit root_path
       fill_in 'user_translation', with: 'RoR'
       click_button 'Проверить'
       expect(page).
@@ -34,7 +33,6 @@ describe "review cards" do
     end
 
     it 'correct translation' do
-      visit root_path
       fill_in 'user_translation', with: 'house'
       click_button 'Проверить'
       expect(page).to have_content 'Вы ввели верный перевод. Продолжайте.'
@@ -42,13 +40,13 @@ describe "review cards" do
   end
 
   describe "training with one card" do
-    before :each do
+    before do
       card = create(:card)
       card.update_attribute(:review_date, Time.now)
+      visit root_path
     end
 
     it 'incorrect translation' do
-      visit root_path
       fill_in 'user_translation', with: 'RoR'
       click_button 'Проверить'
       expect(page).
@@ -56,7 +54,6 @@ describe "review cards" do
     end
 
     it 'correct translation' do
-      visit root_path
       fill_in 'user_translation', with: 'house'
       click_button 'Проверить'
       expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
