@@ -1,9 +1,10 @@
 require 'rails_helper'
+require 'support/helpers/trainer_helper.rb'
+include TrainerHelper
 
 describe "training without cards" do
-  before :all do
-    Card.destroy_all
-    Card.create(original_text: 'дом', translated_text: 'house')
+  before :each do
+    create(:card)
   end
 
   it 'no cards' do
@@ -13,12 +14,8 @@ describe "training without cards" do
 end
 
 describe "training with some cards" do
-  before :all do
-    Card.destroy_all
-    card = Card.create(original_text: 'дом', translated_text: 'house')
-    card.update_attribute(:review_date, Time.now)
-    card = Card.create(original_text: 'дом', translated_text: 'house')
-    card.update_attribute(:review_date, Time.now)
+  before :each do
+    create_review_cards
   end
 
   it 'first visit' do
@@ -27,26 +24,20 @@ describe "training with some cards" do
   end
 
   it 'incorrect translation' do
-    visit root_path
-    fill_in 'user_translation', with: 'RoR'
-    click_button 'Проверить'
+    check_translation('RoR')
     expect(page).
         to have_content 'Вы ввели не верный перевод. Повторите попытку.'
   end
 
   it 'correct translation' do
-    visit root_path
-    fill_in 'user_translation', with: 'house'
-    click_button 'Проверить'
+    check_translation('house')
     expect(page).to have_content 'Вы ввели верный перевод. Продолжайте.'
   end
 end
 
 describe "training with one card" do
-  before :all do
-    Card.destroy_all
-    card = Card.create(original_text: 'дом', translated_text: 'house')
-    card.update_attribute(:review_date, Time.now)
+  before :each do
+    create_review_card
   end
 
   it 'first visit' do
@@ -55,17 +46,13 @@ describe "training with one card" do
   end
 
   it 'incorrect translation' do
-    visit root_path
-    fill_in 'user_translation', with: 'RoR'
-    click_button 'Проверить'
+    check_translation('RoR')
     expect(page).
         to have_content 'Вы ввели не верный перевод. Повторите попытку.'
   end
 
   it 'correct translation' do
-    visit root_path
-    fill_in 'user_translation', with: 'house'
-    click_button 'Проверить'
+    check_translation('house')
     expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
   end
 end
