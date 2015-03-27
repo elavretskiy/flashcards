@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "review cards" do
   describe "training without cards" do
     before do
-      create(:card)
+      create(:user_with_cards)
       visit root_path
     end
 
@@ -14,11 +14,10 @@ describe "review cards" do
 
   describe "training with some cards" do
     before do
-      2.times do
-        card = create(:card)
-        card.update_attribute(:review_date, Time.now)
-        visit root_path
-      end
+      user = create(:user_with_cards, cards_count: 2)
+      user.cards.each { |card| card.update_attribute(:review_date,
+                                                     Time.now - 3.days) }
+      visit root_path
     end
 
     it 'first visit' do
@@ -41,8 +40,9 @@ describe "review cards" do
 
   describe "training with one card" do
     before do
-      card = create(:card)
-      card.update_attribute(:review_date, Time.now)
+      user = create(:user_with_cards)
+      user.cards.each { |card| card.update_attribute(:review_date,
+                                                     Time.now - 3.days) }
       visit root_path
     end
 
