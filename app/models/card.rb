@@ -1,4 +1,5 @@
 class Card < ActiveRecord::Base
+  belongs_to :user
   before_validation :set_review_date, on: :create
   validate :texts_are_not_equal
   validates :original_text, :translated_text, :review_date,
