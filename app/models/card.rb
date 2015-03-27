@@ -4,7 +4,7 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, :review_date,
             presence: { message: 'Необходимо заполнить поле.' }
 
-  scope :pending, -> { where('review_date >= ?', Time.now).order('RANDOM()') }
+  scope :pending, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
 
   def check_translation(user_translation)
     if full_downcase(translated_text) == full_downcase(user_translation)

@@ -1,5 +1,8 @@
 == README
 
+{<img src="https://travis-ci.org/elavretskiy/flashcards.svg?branch=seventh-task"
+alt="Build Status" />}[https://travis-ci.org/elavretskiy/flashcards]
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

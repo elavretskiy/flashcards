@@ -36,11 +36,13 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'debugger', group: [:development, :test]
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'rake'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
-gem 'pg'
 gem 'simple_form'
 gem 'nokogiri'
 gem 'seedbank'
 group :development, :test do
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'factory_girl_rails'
 end
