@@ -6,11 +6,11 @@ module LoginHelper
     click_button 'Войти'
   end
 
-  def registration(email, password, password_confirmation)
+  def register(email, password, password_confirmation)
     visit new_user_path
     fill_in 'user[email]', with: email
     fill_in 'user[password]', with: password
     fill_in 'user[password_confirmation]', with: password_confirmation
-    click_button 'Сохранить'
+    click_button 'Зарегистрироваться'
   end
 end

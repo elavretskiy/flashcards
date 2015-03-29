@@ -1,5 +1,5 @@
 class UserSessionsController < ApplicationController
-  skip_before_filter :require_login, except: [:destroy]
+  skip_before_filter :require_login, except: [:_destroy]
 
   def new
     @user = User.new
@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
 
   def create
     if @user = login(params[:email], params[:password])
-      redirect_back_or_to root_path, notice: 'Вход успешно выполнен.'
+      redirect_back_or_to root_path, notice: 'Вход выполнен успешно.'
     else
       flash.now[:alert] = 'Вход не выполнен. Проверте вводимые E-mail и Пароль.'
       render action: 'new'
@@ -16,6 +16,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to login_path, notice: 'Выход успешно выполнен.'
+    redirect_to login_path, notice: 'Выход выполнен успешно.'
   end
 end

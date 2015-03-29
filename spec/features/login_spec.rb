@@ -15,7 +15,7 @@ describe 'password authentication' do
 
     it 'authentication TRUE' do
       login('test@test.com', '12345')
-      expect(page).to have_content 'Вход успешно выполнен.'
+      expect(page).to have_content 'Вход выполнен успешно.'
     end
 
     it 'incorrect e-mail' do
@@ -37,39 +37,39 @@ describe 'password authentication' do
     end
   end
 
-  describe 'registration' do
+  describe 'register' do
     before do
       visit root_path
     end
 
-    it 'registration TRUE' do
-      registration('test@test.com', '12345', '12345')
+    it 'register TRUE' do
+      register('test@test.com', '12345', '12345')
       expect(page).to have_content 'Пользователь успешно создан.'
     end
 
     it 'password confirmation FALSE' do
-      registration('test@test.com', '12345', '56789')
+      register('test@test.com', '12345', '56789')
       expect(page).to have_content "doesn't match Password"
     end
 
     it 'e-mail FALSE' do
-      registration('test', '12345', '12345')
+      register('test', '12345', '12345')
       expect(page).to have_content 'Пользователь успешно создан.'
     end
 
     it 'e-mail has already been taken' do
-      registration('test@test.com', '12345', '12345')
-      registration('test@test.com', '12345', '12345')
+      register('test@test.com', '12345', '12345')
+      register('test@test.com', '12345', '12345')
       expect(page).to have_content 'has already been taken'
     end
 
     it 'password is too short' do
-      registration('test@test.com', '1', '12345')
+      register('test@test.com', '1', '12345')
       expect(page).to have_content 'is too short (minimum is 3 characters)'
     end
 
     it 'password_confirmation is too short' do
-      registration('test@test.com', '12345', '1')
+      register('test@test.com', '12345', '1')
       expect(page).to have_content "doesn't match Password"
     end
   end

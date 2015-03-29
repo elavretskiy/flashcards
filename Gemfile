@@ -42,6 +42,7 @@ gem 'simple_form'
 gem 'nokogiri'
 gem 'seedbank'
 gem 'sorcery'
+gem 'faraday'
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'

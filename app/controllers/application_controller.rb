@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   private
+
   def not_authenticated
     redirect_to login_path, alert: 'Пожалуйста авторизуйтесь.'
   end

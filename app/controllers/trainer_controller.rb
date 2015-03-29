@@ -13,6 +13,7 @@ class TrainerController < ApplicationController
   end
 
   private
+
   def trainer_params
     params.permit(:user_translation)
   end
