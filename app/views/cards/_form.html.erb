@@ -1,22 +1,12 @@
 <%= simple_form_for card do |f| %>
-  <% if card.errors.any? %>
-    <div id="error_explanation" class="alert alert-warning">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <%= f.error :original_text %>
-      <%= f.error :translated_text %>
-    </div>
-  <% end %>
-
   <div class="form-group">
-    <%= f.input :original_text,  as: :text, label: 'Original text',
+    <%= f.input :original_text,  as: :text, label: 'Оригинал',
                 input_html: { class: 'form-control', required: true,
                               autofocus: true } %>
   </div>
 
   <div class="form-group">
-    <%= f.input :translated_text,  as: :text, label: 'Translated text',
+    <%= f.input :translated_text,  as: :text, label: 'Перевод',
                 input_html: { class: 'form-control', required: true } %>
   </div>
 

@@ -1,24 +1,14 @@
 <% if @card %>
+  <h2>Текущая карточка</h2>
   <%= form_tag review_path(id: @card.id), method: :put do %>
-    <% if flash[:alert] %>
-      <div class="alert alert-info alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"
-                aria-label="Close"><span aria-hidden="true">&times;</span>
-        </button>
-        <% if flash[:alert] %>
-          <p id="notice"><%= flash[:alert] %></p>
-        <% end %>
-      </div>
-    <% end %>
-
     <div class="form-group">
-      <%= label_tag '', 'Original text' %>
+      <%= label_tag '', 'Оригинал' %>
       <%= text_area_tag '', @card.original_text, class: 'form-control',
                         disabled: true %>
     </div>
 
     <div class="form-group">
-      <%= label_tag '', 'Translated text' %>
+      <%= label_tag '', 'Перевод' %>
       <%= text_area_tag :user_translation, nil, class: 'form-control',
                         required: true, autofocus: true %>
     </div>
@@ -26,13 +16,6 @@
     <%= submit_tag 'Проверить', class: 'btn btn-default' %>
   <% end %>
 <% else %>
-
-  <div class="alert alert-info alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <p id="notice">Вы изучили все доступные карточки.
-      Ожидайте наступления даты пересмотра.</p>
-  </div>
-
+  <p class="lead">Вы изучили все доступные карточки.
+    Ожидайте наступления даты пересмотра.</p>
 <% end %>

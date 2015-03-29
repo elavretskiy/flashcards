@@ -5,6 +5,7 @@ class Card < ActiveRecord::Base
   validate :texts_are_not_equal
   validates :original_text, :translated_text, :review_date,
             presence: { message: 'Необходимо заполнить поле.' }
+  validates :user_id, presence: { message: 'Ошибка ассоциации.' }
 
   scope :pending, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
 

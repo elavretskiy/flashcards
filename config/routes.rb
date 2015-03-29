@@ -55,6 +55,13 @@ Rails.application.routes.draw do
   #   end
 
   root 'home#index'
+
   resources :cards
   put 'review' => 'trainer#review'
+
+  resources :user_sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:create, :new, :edit, :update, :destroy]
+
+  get 'login' => 'user_sessions#new', :as => :login
+  post 'logout' => 'user_sessions#destroy', :as => :logout
 end
