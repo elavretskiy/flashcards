@@ -1,6 +1,5 @@
 class OauthsController < ApplicationController
   skip_before_filter :require_login
-  before_filter :require_login, only: :destroy
 
   # sends the user on a trip to the provider,
   # and after authorizing there back to the callback url.
@@ -9,7 +8,7 @@ class OauthsController < ApplicationController
   end
 
   def callback
-    provider = params[:provider]
+    provider = auth_params[:provider]
     if @user = login_from(provider)
       redirect_to root_path,
                   notice:

@@ -122,10 +122,11 @@ Rails.application.config.sorcery.configure do |config|
   # config.facebook.access_permissions = ["email", "publish_stream"]
   # config.facebook.display = "page"
   #
-  config.github.key = '6a83f39c4afe8a1b147e'
-  config.github.secret = '0f67e409beea5497b9f79aa9e7a955173657c8df'
-  config.github.callback_url = 'http://127.0.0.2:3000/oauth/callback?provider=github'
-  config.github.user_info_mapping = { email: 'name' }
+  config.github.key = "#{Rails.application.secrets.sorcery_github_key}"
+  config.github.secret = "#{Rails.application.secrets.sorcery_github_secret}"
+  config.github.callback_url = "#{Rails.application.secrets.sorcery_github_callback_url}"
+  config.github.user_info_mapping = {:email => "name"}
+
   #
   # config.google.key = ""
   # config.google.secret = ""

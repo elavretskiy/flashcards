@@ -43,6 +43,7 @@ gem 'nokogiri'
 gem 'seedbank'
 gem 'sorcery'
 gem 'faraday'
+gem 'figaro'
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
