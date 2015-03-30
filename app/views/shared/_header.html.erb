@@ -16,7 +16,7 @@
             <% if current_user %>
               <%= link_to 'Профиль', edit_profile_path(current_user),
                           class: 'navbar-link' %> |
-              <%= link_to 'Удалить', current_user, method: :delete,
+              <%= link_to 'Удалить', profile_path(current_user), method: :delete,
                           data: { confirm: 'Удалить пользователя?' },
                           class: 'navbar-link' %> |
               <%= link_to 'Выйти', :logout, method: :post,

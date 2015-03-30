@@ -13,6 +13,11 @@ class ProfileController < ApplicationController
     end
   end
 
+  def destroy
+    current_user.destroy
+    redirect_to login_path, notice: 'Пользователь успешно удален.'
+  end
+
   private
 
   def user_params

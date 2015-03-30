@@ -71,4 +71,5 @@ Rails.application.routes.draw do
 
   get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
   put 'profile/:id' => 'profile#update', as: :profile
+  delete 'profile/:id' => 'profile#destroy'
 end
