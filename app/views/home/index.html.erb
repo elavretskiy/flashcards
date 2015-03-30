@@ -1,6 +1,6 @@
 <% if @card %>
   <h2>Текущая карточка</h2>
-  <%= form_tag review_path(id: @card.id), method: :put do %>
+  <%= form_tag review_path(card_id: @card.id), method: :put do %>
     <div class="form-group">
       <%= label_tag '', 'Оригинал' %>
       <%= text_area_tag '', @card.original_text, class: 'form-control',
