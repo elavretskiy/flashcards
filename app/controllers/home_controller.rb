@@ -3,9 +3,9 @@ class HomeController < ApplicationController
 
   def index
     if params[:id]
-      @card = Card.find(params[:id])
+      @card = current_user.cards.find(params[:id])
     else
-      @card = Card.pending.first
+      @card = current_user.cards.pending.first
     end
   end
 end

@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    email 'test@test.by'
+    email 'test@test.com'
     password '12345'
+    password_confirmation '12345'
 
     transient do
       cards_count 1

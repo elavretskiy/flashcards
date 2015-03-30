@@ -3,7 +3,7 @@ class CardsController < ApplicationController
   respond_to :html
 
   def index
-    @cards = Card.all
+    @cards = current_user.cards.all
     respond_with @cards
   end
 
@@ -16,7 +16,7 @@ class CardsController < ApplicationController
   end
 
   def create
-    @card = Card.new(card_params)
+    @card = current_user.cards.build(card_params)
     if @card.save
       redirect_to cards_path
     else
@@ -38,8 +38,9 @@ class CardsController < ApplicationController
   end
 
   private
+
   def set_card
-    @card = Card.find(params[:id])
+    @card = current_user.cards.find(params[:id])
   end
 
   def card_params

@@ -1,10 +1,13 @@
 require 'rails_helper'
+require 'support/helpers/login_helper.rb'
+include LoginHelper
 
-describe "review cards" do
-  describe "training without cards" do
+describe 'review cards' do
+  describe 'training without cards' do
     before do
       create(:user_with_cards)
       visit root_path
+      login('test@test.com', '12345')
     end
 
     it 'no cards' do
@@ -12,16 +15,17 @@ describe "review cards" do
     end
   end
 
-  describe "training with some cards" do
+  describe 'training with some cards' do
     before do
       user = create(:user_with_cards, cards_count: 2)
       user.cards.each { |card| card.update_attribute(:review_date,
                                                      Time.now - 3.days) }
       visit root_path
+      login('test@test.com', '12345')
     end
 
     it 'first visit' do
-      expect(page).to have_content 'Original text'
+      expect(page).to have_content 'Оригинал'
     end
 
     it 'incorrect translation' do
@@ -38,12 +42,13 @@ describe "review cards" do
     end
   end
 
-  describe "training with one card" do
+  describe 'training with one card' do
     before do
       user = create(:user_with_cards)
       user.cards.each { |card| card.update_attribute(:review_date,
                                                      Time.now - 3.days) }
       visit root_path
+      login('test@test.com', '12345')
     end
 
     it 'incorrect translation' do

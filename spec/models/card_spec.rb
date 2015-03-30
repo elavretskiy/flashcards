@@ -116,4 +116,10 @@ describe Card do
                        user_id: 1)
     expect(card.check_translation('RoR')).to be false
   end
+
+  it 'create card witout user_id' do
+    card = Card.create(original_text: 'дом', translated_text: 'house')
+    expect(card.errors[:user_id]).
+        to include('Ошибка ассоциации.')
+  end
 end
