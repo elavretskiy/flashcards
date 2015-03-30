@@ -1,6 +1,20 @@
 <% if @card %>
   <h2>Текущая карточка</h2>
+
   <%= form_tag review_path(card_id: @card.id), method: :put do %>
+
+    <% if @card.image? %>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-3 col-md-2 card_image">
+            <p class="thumbnail">
+              <%= image_tag @card.image_url %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <div class="form-group">
       <%= label_tag '', 'Оригинал' %>
       <%= text_area_tag '', @card.original_text, class: 'form-control',
