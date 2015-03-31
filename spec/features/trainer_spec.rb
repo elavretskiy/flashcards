@@ -185,7 +185,7 @@ describe 'review cards with current_block' do
     before do
       user = create(:user_with_two_blocks_and_one_card_in_each)
       block = user.blocks.first
-      user.set_current_block(block.id, true)
+      user.set_current_block(block.id)
       block = user.blocks.last
       card = user.cards.find_by(block_id: block.id)
       card.update_attribute(:review_date, Time.now - 3.days)
@@ -202,7 +202,7 @@ describe 'review cards with current_block' do
     before do
       user = create(:user_with_two_blocks_and_two_cards_in_each)
       block = user.blocks.first
-      user.set_current_block(block.id, true)
+      user.set_current_block(block.id)
       card = user.cards.find_by(block_id: block.id)
       card.update_attribute(:review_date, Time.now - 3.days)
       visit root_path
@@ -231,7 +231,7 @@ describe 'review cards with current_block' do
     before do
       user = create(:user_with_two_blocks_and_one_card_in_each)
       block = user.blocks.first
-      user.set_current_block(block.id, true)
+      user.set_current_block(block.id)
       card = user.cards.find_by(block_id: block.id)
       card.update_attribute(:review_date, Time.now - 3.days)
       visit root_path
