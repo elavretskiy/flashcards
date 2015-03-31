@@ -17,7 +17,6 @@ class BlocksController < ApplicationController
   def create
     @block = current_user.blocks.build(block_params)
     if @block.save
-      current_user.change_current_block(@block.id, params[:set_as_current])
       redirect_to blocks_path
     else
       respond_with @block
@@ -26,7 +25,6 @@ class BlocksController < ApplicationController
 
   def update
     if @block.update(block_params)
-      current_user.change_current_block(@block.id, params[:set_as_current])
       redirect_to blocks_path
     else
       respond_with @block
@@ -39,12 +37,12 @@ class BlocksController < ApplicationController
   end
 
   def set_as_current
-    current_user.change_current_block(@block.id, true)
+    current_user.set_current_block(@block.id)
     redirect_to blocks_path
   end
 
   def reset_as_current
-    current_user.change_current_block(@block.id, false)
+    current_user.reset_current_block(@block.id)
     redirect_to blocks_path
   end
 

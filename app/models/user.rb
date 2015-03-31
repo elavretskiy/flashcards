@@ -19,11 +19,11 @@ class User < ActiveRecord::Base
     authentications.where(provider: 'github').present?
   end
 
-  def change_current_block(id, set_as_current)
-    if set_as_current
-      update_attribute(:current_block_id, id)
-    else
-      update_attribute(:current_block_id, nil) if id == current_block_id
-    end
+  def set_current_block(id)
+    update_attribute(:current_block_id, id)
+  end
+
+  def reset_current_block(id)
+    update_attribute(:current_block_id, nil) if id == current_block_id
   end
 end
