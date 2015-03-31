@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     update_attribute(:current_block_id, block.id)
   end
 
-  def reset_current_block(block)
-    update_attribute(:current_block_id, nil) if block.id == current_block_id
+  def reset_current_block
+    update_attribute(:current_block_id, nil)
   end
 end

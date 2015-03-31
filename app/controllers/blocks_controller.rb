@@ -42,7 +42,7 @@ class BlocksController < ApplicationController
   end
 
   def reset_as_current
-    current_user.reset_current_block(@block)
+    current_user.reset_current_block
     redirect_to blocks_path
   end
 
