@@ -171,7 +171,7 @@ end
 describe 'review cards with current_block' do
   describe 'training without cards' do
     before do
-      create(:user_with_two_blocks_without_cards, current_block: 1)
+      create(:user_with_two_blocks_without_cards, current_block_id: 1)
       visit root_path
       login('test@test.com', '12345')
     end

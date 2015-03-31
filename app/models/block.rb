@@ -3,4 +3,8 @@ class Block < ActiveRecord::Base
   belongs_to :user
 
   validates :title, presence: { message: 'Необходимо заполнить поле.' }
+
+  def current?
+    id == self.user.current_block_id
+  end
 end

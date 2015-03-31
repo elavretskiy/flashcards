@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :cards, dependent: :destroy
   has_many :blocks, dependent: :destroy
   has_many :authentications, dependent: :destroy
+  belongs_to :current_block, class_name: 'Block'
 
   accepts_nested_attributes_for :authentications
 
@@ -20,9 +21,9 @@ class User < ActiveRecord::Base
 
   def set_current_block(id, state)
     if state
-      update_attribute(:current_block, id)
+      update_attribute(:current_block_id, id)
     else
-      update_attribute(:current_block, nil) if id == current_block
+      update_attribute(:current_block_id, nil) if id == current_block_id
     end
   end
 end

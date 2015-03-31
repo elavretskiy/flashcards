@@ -12,14 +12,7 @@ class Card < ActiveRecord::Base
 
   mount_uploader :image, CardImageUploader
 
-  def self.pending(current_block)
-    if current_block
-      where('review_date <= ? AND block_id = ?',
-            Time.now, current_block).order('RANDOM()')
-    else
-      where('review_date <= ?', Time.now).order('RANDOM()')
-    end
-  end
+  scope :pending, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
 
   def check_translation(user_translation)
     if full_downcase(translated_text) == full_downcase(user_translation)
