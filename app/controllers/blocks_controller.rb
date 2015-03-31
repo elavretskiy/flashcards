@@ -1,5 +1,6 @@
 class BlocksController < ApplicationController
-  before_action :set_block, only: [:destroy, :edit, :update]
+  before_action :set_block, only: [:destroy, :edit, :update, :set_as_current,
+                                   :reset_as_current]
   respond_to :html
 
   def index
@@ -16,7 +17,7 @@ class BlocksController < ApplicationController
   def create
     @block = current_user.blocks.build(block_params)
     if @block.save
-      current_user.set_current_block(@block.id, params[:current_block])
+      current_user.change_current_block(@block.id, params[:set_as_current])
       redirect_to blocks_path
     else
       respond_with @block
@@ -25,7 +26,7 @@ class BlocksController < ApplicationController
 
   def update
     if @block.update(block_params)
-      current_user.set_current_block(@block.id, params[:current_block])
+      current_user.change_current_block(@block.id, params[:set_as_current])
       redirect_to blocks_path
     else
       respond_with @block
@@ -37,7 +38,21 @@ class BlocksController < ApplicationController
     respond_with @block
   end
 
+  def set_as_current
+    current_user.change_current_block(@block.id, true)
+    redirect_to blocks_path
+  end
+
+  def reset_as_current
+    current_user.change_current_block(@block.id, false)
+    redirect_to blocks_path
+  end
+
   private
+
+  def set_block
+    current_user.set_current_block(@block.id, params[:set_as_current])
+  end
 
   def set_block
     @block = current_user.blocks.find(params[:id])
