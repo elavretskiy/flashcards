@@ -51,10 +51,6 @@ class BlocksController < ApplicationController
   private
 
   def set_block
-    current_user.set_current_block(@block.id, params[:set_as_current])
-  end
-
-  def set_block
     @block = current_user.blocks.find(params[:id])
   end
 
