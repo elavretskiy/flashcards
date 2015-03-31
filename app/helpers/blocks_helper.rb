@@ -1,5 +1,5 @@
 module BlocksHelper
-  def current_block_check_box(block)
+  def current_block_check_box
     if @block.id == current_user.current_block
       check_box_tag :current_block, nil, true
     else
