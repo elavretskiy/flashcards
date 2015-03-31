@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     if params[:id]
       @card = current_user.cards.find(params[:id])
     else
-      @card = current_user.cards.pending.first
+      @card = current_user.cards.pending(current_user.current_block).first
     end
   end
 end

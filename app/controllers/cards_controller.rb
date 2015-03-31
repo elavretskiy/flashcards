@@ -3,13 +3,11 @@ class CardsController < ApplicationController
   respond_to :html
 
   def index
-    @cards = current_user.cards.all
-    respond_with @cards
+    @cards = current_user.cards.all.order('review_date')
   end
 
   def new
     @card = Card.new
-    respond_with @card
   end
 
   def edit
@@ -45,6 +43,6 @@ class CardsController < ApplicationController
 
   def card_params
     params.require(:card).permit(:original_text, :translated_text, :review_date,
-                                 :image, :image_cache, :remove_image)
+                                 :image, :image_cache, :remove_image, :block_id)
   end
 end

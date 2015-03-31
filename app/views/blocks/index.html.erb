@@ -1,0 +1,18 @@
+<table class="table table-hover table-condensed">
+  <thead>
+  <tr>
+    <th>Название</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @blocks.each do |block| %>
+    <tr class="table table-hover table-condensed">
+      <td><%= block.title %></td>
+      <td><%= link_to 'Редактировать', edit_block_path(block) %></td>
+      <td><%= link_to 'Удалить', block, method: :delete,
+                      data: { confirm: 'Удалить колоду?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
