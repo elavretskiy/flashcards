@@ -5,6 +5,6 @@ class Block < ActiveRecord::Base
   validates :title, presence: { message: 'Необходимо заполнить поле.' }
 
   def current?
-    id == self.user.current_block_id
+    id == user.current_block_id
   end
 end
