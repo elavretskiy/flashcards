@@ -19,8 +19,8 @@ Rails.application.routes.draw do
   delete 'profile/:id' => 'profile#destroy'
 
   resources :blocks
-  post 'blocks/:id/set_as_current' => 'blocks#set_as_current',
+  put 'blocks/:id/set_as_current' => 'blocks#set_as_current',
        as: :block_set_as_current
-  post 'blocks/:id/reset_as_current' => 'blocks#reset_as_current',
+  put 'blocks/:id/reset_as_current' => 'blocks#reset_as_current',
        as: :block_reset_as_current
 end

@@ -37,12 +37,12 @@ class BlocksController < ApplicationController
   end
 
   def set_as_current
-    current_user.set_current_block(@block.id)
+    current_user.set_current_block(@block)
     redirect_to blocks_path
   end
 
   def reset_as_current
-    current_user.reset_current_block(@block.id)
+    current_user.reset_current_block(@block)
     redirect_to blocks_path
   end
 
