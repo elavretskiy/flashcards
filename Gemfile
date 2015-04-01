@@ -51,4 +51,4 @@ gem 'faraday'
 gem 'figaro'
 gem 'carrierwave'
 gem 'mini_magick'
-
+gem "fog-aws"
