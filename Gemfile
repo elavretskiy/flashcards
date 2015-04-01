@@ -52,6 +52,6 @@ gem 'figaro'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog-aws'
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 
 ruby '2.1.5'
