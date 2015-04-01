@@ -29,18 +29,6 @@ describe 'review cards with one block' do
     end
   end
 
-  describe 'training without review cards' do
-    before do
-      create(:user_with_one_block_and_two_cards)
-      visit root_path
-      login('test@test.com', '12345')
-    end
-
-    it 'no cards' do
-      expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
-    end
-  end
-
   describe 'training with two cards' do
     before do
       user = create(:user_with_one_block_and_two_cards)
@@ -105,18 +93,6 @@ describe 'review cards with two blocks' do
     end
   end
 
-  describe 'training without review cards' do
-    before do
-      create(:user_with_two_blocks_and_one_card_in_each)
-      visit root_path
-      login('test@test.com', '12345')
-    end
-
-    it 'no cards' do
-      expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
-    end
-  end
-
   describe 'training with two cards' do
     before do
       user = create(:user_with_two_blocks_and_one_card_in_each)
@@ -172,23 +148,6 @@ describe 'review cards with current_block' do
   describe 'training without cards' do
     before do
       create(:user_with_two_blocks_without_cards, current_block_id: 1)
-      visit root_path
-      login('test@test.com', '12345')
-    end
-
-    it 'no cards' do
-      expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
-    end
-  end
-
-  describe 'training without review cards' do
-    before do
-      user = create(:user_with_two_blocks_and_one_card_in_each)
-      block = user.blocks.first
-      user.set_current_block(block)
-      block = user.blocks.last
-      card = user.cards.find_by(block_id: block.id)
-      card.update_attribute(:review_date, Time.now - 3.days)
       visit root_path
       login('test@test.com', '12345')
     end
