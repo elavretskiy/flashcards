@@ -51,4 +51,7 @@ gem 'faraday'
 gem 'figaro'
 gem 'carrierwave'
 gem 'mini_magick'
-gem "fog-aws"
+gem 'fog-aws'
+gem 'rails_12factor'
+
+ruby '2.1.5'
