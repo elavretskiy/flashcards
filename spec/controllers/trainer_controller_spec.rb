@@ -87,7 +87,7 @@ describe TrainerController do
 
       it 'set review_count try=1' do
         card = create_and_check_review_card(@user, @block, 3, 'car')
-        expect(session[:review_count]).to eq(2)
+        expect(card.review_attempt).to eq(2)
       end
 
       it 'set review_date try=2' do
@@ -106,7 +106,7 @@ describe TrainerController do
       it 'set review_count try=2' do
         card = create_and_check_review_card(@user, @block, 3, 'car')
         card = check_review_card(card, 'car', 1)
-        expect(session[:review_count]).to eq(3)
+        expect(card.review_attempt).to eq(3)
       end
 
       it 'set review_date try=3' do
@@ -125,7 +125,7 @@ describe TrainerController do
       it 'set review_count try=3' do
         card = create_and_check_review_card(@user, @block, 3, 'car')
         card = check_review_card(card, 'car', 2)
-        expect(session[:review_count]).to eq(nil)
+        expect(card.review_attempt).to eq(1)
       end
 
       it 'set review_date try=4' do
@@ -144,7 +144,7 @@ describe TrainerController do
       it 'set review_count try=4' do
         card = create_and_check_review_card(@user, @block, 3, 'car')
         card = check_review_card(card, 'car', 3)
-        expect(session[:review_count]).to eq(2)
+        expect(card.review_attempt).to eq(2)
       end
     end
 
@@ -174,7 +174,7 @@ describe TrainerController do
         card = create_and_check_review_card(@user, @block, 3, 'car')
         card = check_review_card(card, 'car', 1)
         card = check_review_card(card, 'house', 1)
-        expect(session[:review_count]).to eq(nil)
+        expect(card.review_attempt).to eq(1)
       end
 
       it 'set review_date try=4' do
@@ -196,7 +196,7 @@ describe TrainerController do
         card = create_and_check_review_card(@user, @block, 3, 'car')
         card = check_review_card(card, 'car', 2)
         card = check_review_card(card, 'house', 1)
-        expect(session[:review_count]).to eq(nil)
+        expect(card.review_attempt).to eq(1)
       end
 
       it 'set review_date try=4+1' do
@@ -221,7 +221,7 @@ describe TrainerController do
         card = check_review_card(card, 'car', 2)
         card = check_review_card(card, 'house', 1)
         card = create_and_check_review_card(@user, @block, 1, 'house')
-        expect(session[:review_count]).to eq(nil)
+        expect(card.review_attempt).to eq(1)
       end
     end
   end

@@ -23,7 +23,11 @@ class Card < ActiveRecord::Base
   end
 
   def reset_review_step
-    update_attributes(review_step: 1)
+    if review_attempt < 3
+      update_attributes(review_attempt: [review_attempt + 1, 3].min)
+    else
+      update_attributes(review_step: 1, review_attempt: 1)
+    end
   end
 
   protected
@@ -34,21 +38,22 @@ class Card < ActiveRecord::Base
 
   def set_review_date_for_step
     case review_step
-      when 1
-        update_review_params(Time.now + 12.hours, review_step + 1)
-      when 2
-        update_review_params(Time.now + 3.days, review_step + 1)
-      when 3
-        update_review_params(Time.now + 7.days, review_step + 1)
-      when 4
-        update_review_params(Time.now + 14.days, review_step + 1)
-      when 5
-        update_review_params(Time.now + 1.months, review_step)
+    when 1
+      update_review_params(Time.now + 12.hours)
+    when 2
+      update_review_params(Time.now + 3.days)
+    when 3
+      update_review_params(Time.now + 7.days)
+    when 4
+      update_review_params(Time.now + 14.days)
+    when 5
+      update_review_params(Time.now + 1.months)
     end
   end
 
-  def update_review_params(date, step)
-    update_attributes(review_date: date, review_step: step)
+  def update_review_params(date)
+    update_attributes(review_date: date, review_step: [review_step + 1, 5].min,
+                      review_attempt: 1)
   end
 
   def texts_are_not_equal

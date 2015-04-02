@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :destroy]
 
   resources :blocks do
-    put 'set_as_current', on: :member
-    put 'reset_as_current', on: :member
+    member do
+      put 'set_as_current'
+      put 'reset_as_current'
+    end
   end
 
   put 'review_card' => 'trainer#review_card'
