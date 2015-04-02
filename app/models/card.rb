@@ -20,10 +20,10 @@ class Card < ActiveRecord::Base
 
     if levenshtein_distance <= 1
       set_review_date_for_step
-      levenshtein_distance
+      { state: true, distance: levenshtein_distance }
     else
       reset_review_step
-      nil
+      { state: false, distance: levenshtein_distance }
     end
   end
 
