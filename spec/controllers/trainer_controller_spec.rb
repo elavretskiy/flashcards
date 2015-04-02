@@ -65,17 +65,6 @@ describe TrainerController do
         card = create_and_check_review_card(@user, @block, 5, 'house')
         expect(card.review_step).to eq(5)
       end
-
-      it 'set review_date step=1 levenshtein_distance=1' do
-        card = create_and_check_review_card(@user, @block, 1, 'hous')
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 12.hours).strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step step=1 levenshtein_distance=1' do
-        card = create_and_check_review_card(@user, @block, 5, 'hous')
-        expect(card.review_step).to eq(5)
-      end
     end
 
     describe 'incorrect translation' do
@@ -155,28 +144,6 @@ describe TrainerController do
       it 'set review_count try=4' do
         card = create_and_check_review_card(@user, @block, 3, 'car')
         card = check_review_card(card, 'car', 3)
-        expect(card.review_attempt).to eq(2)
-      end
-
-      it 'set review_count try=4' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 3)
-        expect(card.review_attempt).to eq(2)
-      end
-
-      it 'set review_date try=1 levenshtein_distance=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'hou')
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq(card.review_date.strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step try=1 levenshtein_distance=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'hou')
-        expect(card.review_step).to eq(3)
-      end
-
-      it 'set review_count try=1 levenshtein_distance=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'hou')
         expect(card.review_attempt).to eq(2)
       end
     end

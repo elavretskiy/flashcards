@@ -15,15 +15,11 @@ class Card < ActiveRecord::Base
   scope :pending, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
 
   def check_translation(user_translation)
-    levenshtein_distance = Levenshtein.distance(full_downcase(translated_text),
-                                                full_downcase(user_translation))
-
-    if levenshtein_distance <= 1
+    if full_downcase(translated_text) == full_downcase(user_translation)
       set_review_date_for_step
-      levenshtein_distance
     else
       reset_review_step
-      nil
+      false
     end
   end
 

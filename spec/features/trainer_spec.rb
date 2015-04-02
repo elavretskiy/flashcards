@@ -54,19 +54,6 @@ describe 'review cards with one block' do
       click_button 'Проверить'
       expect(page).to have_content 'Вы ввели верный перевод. Продолжайте.'
     end
-
-    it 'correct translation levenshtein_distance=1' do
-      fill_in 'user_translation', with: 'hous'
-      click_button 'Проверить'
-      expect(page).to have_content 'Вы ввели перевод c опечаткой.'
-    end
-
-    it 'incorrect translation levenshtein_distance=2' do
-      fill_in 'user_translation', with: 'hou'
-      click_button 'Проверить'
-      expect(page).
-          to have_content 'Вы ввели не верный перевод. Повторите попытку.'
-    end
   end
 
   describe 'training with one card' do
@@ -89,19 +76,6 @@ describe 'review cards with one block' do
       fill_in 'user_translation', with: 'house'
       click_button 'Проверить'
       expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
-    end
-
-    it 'incorrect translation levenshtein_distance=2' do
-      fill_in 'user_translation', with: 'hou'
-      click_button 'Проверить'
-      expect(page).
-          to have_content 'Вы ввели не верный перевод. Повторите попытку.'
-    end
-
-    it 'correct translation levenshtein_distance=1' do
-      fill_in 'user_translation', with: 'hous'
-      click_button 'Проверить'
-      expect(page).to have_content 'Вы ввели перевод c опечаткой.'
     end
   end
 end
@@ -144,19 +118,6 @@ describe 'review cards with two blocks' do
       click_button 'Проверить'
       expect(page).to have_content 'Вы ввели верный перевод. Продолжайте.'
     end
-
-    it 'incorrect translation levenshtein_distance=2' do
-      fill_in 'user_translation', with: 'hou'
-      click_button 'Проверить'
-      expect(page).
-          to have_content 'Вы ввели не верный перевод. Повторите попытку.'
-    end
-
-    it 'correct translation levenshtein_distance=1' do
-      fill_in 'user_translation', with: 'hous'
-      click_button 'Проверить'
-      expect(page).to have_content 'Вы ввели перевод c опечаткой.'
-    end
   end
 
   describe 'training with one card' do
@@ -179,19 +140,6 @@ describe 'review cards with two blocks' do
       fill_in 'user_translation', with: 'house'
       click_button 'Проверить'
       expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
-    end
-
-    it 'incorrect translation levenshtein_distance=2' do
-      fill_in 'user_translation', with: 'hou'
-      click_button 'Проверить'
-      expect(page).
-          to have_content 'Вы ввели не верный перевод. Повторите попытку.'
-    end
-
-    it 'correct translation levenshtein_distance=1' do
-      fill_in 'user_translation', with: 'hous'
-      click_button 'Проверить'
-      expect(page).to have_content 'Вы ввели перевод c опечаткой.'
     end
   end
 end
@@ -236,19 +184,6 @@ describe 'review cards with current_block' do
       click_button 'Проверить'
       expect(page).to have_content 'Вы ввели верный перевод. Продолжайте.'
     end
-
-    it 'incorrect translation levenshtein_distance=2' do
-      fill_in 'user_translation', with: 'hou'
-      click_button 'Проверить'
-      expect(page).
-          to have_content 'Вы ввели не верный перевод. Повторите попытку.'
-    end
-
-    it 'correct translation levenshtein_distance=1' do
-      fill_in 'user_translation', with: 'hous'
-      click_button 'Проверить'
-      expect(page).to have_content 'Вы ввели перевод c опечаткой.'
-    end
   end
 
   describe 'training with one card' do
@@ -271,19 +206,6 @@ describe 'review cards with current_block' do
 
     it 'correct translation' do
       fill_in 'user_translation', with: 'house'
-      click_button 'Проверить'
-      expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
-    end
-
-    it 'incorrect translation levenshtein_distance=2' do
-      fill_in 'user_translation', with: 'hou'
-      click_button 'Проверить'
-      expect(page).
-          to have_content 'Вы ввели не верный перевод. Повторите попытку.'
-    end
-
-    it 'correct translation levenshtein_distance=1' do
-      fill_in 'user_translation', with: 'hous'
       click_button 'Проверить'
       expect(page).to have_content 'Ожидайте наступления даты пересмотра.'
     end
