@@ -4,13 +4,14 @@ class TrainerController < ApplicationController
   def review_card
     @card = current_user.cards.find(params[:card_id])
     if @card.check_translation(trainer_params[:user_translation])
+      session[:review_count] = nil
       flash[:notice] = 'Вы ввели верный перевод. Продолжайте.'
       redirect_to root_path
     else
       session[:review_count] = 1 if session[:review_count] == nil
       if session[:review_count] == 3
         @card.reset_review_step
-        session[:review_count] = 1
+        session[:review_count] = nil
       else
         session[:review_count] += 1
       end

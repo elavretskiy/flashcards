@@ -12,12 +12,12 @@
 
       <% if block.current? %>
         <td>
-          <%= link_to 'Сделать обычной', block_reset_as_current_path(block),
+          <%= link_to 'Сделать обычной', reset_as_current_block_path(block),
                       method: :put %>
         </td>
       <% else %>
         <td>
-          <%= link_to 'Сделать текущей', block_set_as_current_path(block),
+          <%= link_to 'Сделать текущей', set_as_current_block_path(block),
                       method: :put %>
         </td>
       <% end %>

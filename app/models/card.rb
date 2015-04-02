@@ -35,20 +35,20 @@ class Card < ActiveRecord::Base
   def set_review_date_for_step
     case review_step
       when 1
-        update_attributes(review_date: Time.now + 12.hours,
-                          review_step: review_step + 1)
+        update_review_params(Time.now + 12.hours, review_step + 1)
       when 2
-        update_attributes(review_date: Time.now + 3.days,
-                          review_step: review_step + 1)
+        update_review_params(Time.now + 3.days, review_step + 1)
       when 3
-        update_attributes(review_date: Time.now + 7.days,
-                          review_step: review_step + 1)
+        update_review_params(Time.now + 7.days, review_step + 1)
       when 4
-        update_attributes(review_date: Time.now + 14.days,
-                          review_step: review_step + 1)
+        update_review_params(Time.now + 14.days, review_step + 1)
       when 5
-        update_attributes(review_date: Time.now + 1.months)
+        update_review_params(Time.now + 1.months, review_step)
     end
+  end
+
+  def update_review_params(date, step)
+    update_attributes(review_date: date, review_step: step)
   end
 
   def texts_are_not_equal
