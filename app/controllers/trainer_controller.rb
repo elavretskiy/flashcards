@@ -7,7 +7,6 @@ class TrainerController < ApplicationController
       flash[:notice] = 'Вы ввели верный перевод. Продолжайте.'
       redirect_to root_path
     else
-      @card.reset_review_step
       flash[:alert] = 'Вы ввели не верный перевод. Повторите попытку.'
       redirect_to root_path(id: @card.id)
     end

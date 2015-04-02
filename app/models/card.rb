@@ -18,9 +18,12 @@ class Card < ActiveRecord::Base
     if full_downcase(translated_text) == full_downcase(user_translation)
       set_review_date_for_step
     else
+      reset_review_step
       false
     end
   end
+
+  protected
 
   def reset_review_step
     if review_attempt < 3
@@ -29,8 +32,6 @@ class Card < ActiveRecord::Base
       update_attributes(review_step: 1, review_attempt: 1)
     end
   end
-
-  protected
 
   def set_review_date_as_now
     self.review_date = Time.now
