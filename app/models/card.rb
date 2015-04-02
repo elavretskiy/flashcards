@@ -38,18 +38,14 @@ class Card < ActiveRecord::Base
   end
 
   def set_review_date_for_step
-    case review_step
-    when 1
-      update_review_params(Time.now + 12.hours)
-    when 2
-      update_review_params(Time.now + 3.days)
-    when 3
-      update_review_params(Time.now + 7.days)
-    when 4
-      update_review_params(Time.now + 14.days)
-    when 5
-      update_review_params(Time.now + 1.months)
-    end
+    review_date_shift = case review_step
+                        when 1 then 12.hours
+                        when 2 then 3.days
+                        when 3 then 7.days
+                        when 4 then 14.days
+                        when 5 then 1.months
+                        end
+    update_review_params(Time.now + review_date_shift)
   end
 
   def update_review_params(date)
