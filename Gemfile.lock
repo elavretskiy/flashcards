@@ -90,7 +90,6 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.2)
     jwt (1.4.1)
-    levenshtein (0.2.2)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
@@ -210,7 +209,6 @@ DEPENDENCIES
   fog-aws
   jbuilder (~> 2.0)
   jquery-rails
-  levenshtein
   mini_magick
   nokogiri
   pg
