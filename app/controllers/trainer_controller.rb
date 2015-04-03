@@ -18,7 +18,6 @@ class TrainerController < ApplicationController
       end
       redirect_to root_path
     else
-      @card.pending_cards_notification
       flash[:alert] = 'Вы ввели не верный перевод. Повторите попытку.'
       redirect_to root_path(id: @card.id)
     end

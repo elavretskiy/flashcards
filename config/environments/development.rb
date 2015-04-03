@@ -37,12 +37,12 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      authentication: :plain,
-      address: 'smtp.mailgun.org',
-      port: 587,
-      domain: 'sandboxb5b0b0ca7f9a4977993479199f0c84ea.mailgun.org',
-      user_name: 'postmaster@sandboxb5b0b0ca7f9a4977993479199f0c84ea.mailgun.org',
-      password: 'b09efd309f24990fe1524b1e981839cd'
+    authentication: :plain,
+    address: 'smtp.mailgun.org',
+    port: 587,
+    domain: 'sandboxb5b0b0ca7f9a4977993479199f0c84ea.mailgun.org',
+    user_name: 'postmaster@sandboxb5b0b0ca7f9a4977993479199f0c84ea.mailgun.org',
+    password: 'b09efd309f24990fe1524b1e981839cd'
   }
 
   config.action_mailer.default_url_options = { host: '127.0.0.2:3000', port: 3000 }

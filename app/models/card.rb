@@ -29,7 +29,7 @@ class Card < ActiveRecord::Base
 
   def pending_cards_notification
     users = User.where.not(email: nil)
-    users.each { |user|
+    users.each do |user|
       if user.current_block
         cards_count = user.current_block.cards.pending.count
       else
@@ -37,9 +37,9 @@ class Card < ActiveRecord::Base
       end
 
       if cards_count > 0
-        CardsMailer.pending_cards_notification(user.email, cards_count).deliver
+        CardsMailer.pending_cards_notification(user.email).deliver
       end
-    }
+    end
   end
 
   protected
