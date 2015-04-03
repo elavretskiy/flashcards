@@ -27,6 +27,21 @@ class Card < ActiveRecord::Base
     end
   end
 
+  def pending_cards_notification
+    users = User.where.not(email: nil)
+    users.each { |user|
+      if user.current_block
+        cards_count = user.current_block.cards.pending.count
+      else
+        cards_count = user.cards.pending.count
+      end
+
+      if cards_count > 0
+        CardsMailer.pending_cards_notification(user.email, cards_count).deliver
+      end
+    }
+  end
+
   protected
 
   def reset_review_step
