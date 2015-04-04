@@ -49,7 +49,7 @@ describe 'password authentication' do
 
     it 'password confirmation FALSE' do
       register('test@test.com', '12345', '56789')
-      expect(page).to have_content "doesn't match Password"
+      expect(page).to have_content "Значения не совпадают."
     end
 
     it 'e-mail FALSE' do
@@ -60,17 +60,17 @@ describe 'password authentication' do
     it 'e-mail has already been taken' do
       register('test@test.com', '12345', '12345')
       register('test@test.com', '12345', '12345')
-      expect(page).to have_content 'has already been taken'
+      expect(page).to have_content 'Не уникальное значение.'
     end
 
     it 'password is too short' do
       register('test@test.com', '1', '12345')
-      expect(page).to have_content 'is too short (minimum is 3 characters)'
+      expect(page).to have_content 'Короткое значение.'
     end
 
     it 'password_confirmation is too short' do
       register('test@test.com', '12345', '1')
-      expect(page).to have_content "doesn't match Password"
+      expect(page).to have_content 'Значения не совпадают.'
     end
   end
 end
