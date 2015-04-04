@@ -9,7 +9,7 @@ class ProfileController < ApplicationController
       redirect_to edit_profile_path,
                   notice: 'Профиль пользователя успешно обновлен.'
     else
-      respond_with @user
+      respond_with current_user
     end
   end
 
@@ -21,6 +21,7 @@ class ProfileController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation,
+                                 :locale)
   end
 end

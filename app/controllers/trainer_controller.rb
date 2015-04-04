@@ -8,17 +8,16 @@ class TrainerController < ApplicationController
 
     if check_result[:state]
       if check_result[:distance] == 0
-        flash[:notice] = 'Вы ввели верный перевод. Продолжайте.'
+        flash[:notice] = t(:correct_translation_notice)
       else
-        flash[:alert] =
-            "Вы ввели перевод c опечаткой.
-            Ваш вариант: #{trainer_params[:user_translation]} /
-            Оригинал: #{@card.original_text} /
-            Перевод: #{@card.translated_text}. Продолжайте."
+        flash[:alert] = t 'translation_from_misprint_alert',
+                          user_translation: trainer_params[:user_translation],
+                          original_text: @card.original_text,
+                          translated_text: @card.translated_text
       end
       redirect_to root_path
     else
-      flash[:alert] = 'Вы ввели не верный перевод. Повторите попытку.'
+      flash[:alert] = t(:incorrect_translation_alert)
       redirect_to root_path(id: @card.id)
     end
   end

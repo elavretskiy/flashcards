@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  filter :locale
+
   root 'home#index'
 
   resources :cards
