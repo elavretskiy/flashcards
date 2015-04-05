@@ -2,7 +2,7 @@
                     method: :put do |f| %>
   <div class="form-group">
     <%= f.input :locale,
-                collection: [:ru, :en],
+                collection: I18n.available_locales, include_blank: true,
                 label: 'Локаль',
                 input_html: { class: 'form-control' } %>
   </div>

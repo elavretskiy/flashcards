@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :blocks, dependent: :destroy
   has_many :authentications, dependent: :destroy
   belongs_to :current_block, class_name: 'Block'
+  before_save :check_locale
 
   accepts_nested_attributes_for :authentications
 
@@ -25,5 +26,13 @@ class User < ActiveRecord::Base
 
   def reset_current_block
     update_attribute(:current_block_id, nil)
+  end
+
+  private
+
+  def check_locale
+    if !I18n.available_locales.map(&:to_s).include?(locale)
+      locale.empty? ? self.locale = nil : self.locale = I18n.default_locale
+    end
   end
 end

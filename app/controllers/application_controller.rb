@@ -8,17 +8,21 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     if current_user
-      if current_user.locale.empty?
+      if current_user.locale
+        I18n.locale = current_user.locale
+      else
         I18n.locale = http_accept_language.
             compatible_language_from(I18n.available_locales)
-      else
-        I18n.locale = current_user.locale
       end
     else
       if params[:user_locale]
-        I18n.locale = params[:user_locale]
-        session[:user_locale] = params[:user_locale]
-      elsif !session[:user_locale]
+        I18n.available_locales.map(&:to_s).include?(params[:user_locale]) ?
+            I18n.locale = params[:user_locale] :
+            I18n.locale = I18n.default_locale
+        session[:user_locale] = I18n.locale
+      elsif session[:user_locale]
+        I18n.locale = session[:user_locale]
+      else
         I18n.locale = http_accept_language.
             compatible_language_from(I18n.available_locales)
       end
