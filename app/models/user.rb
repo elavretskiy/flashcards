@@ -31,8 +31,10 @@ class User < ActiveRecord::Base
   private
 
   def check_locale
-    if !I18n.available_locales.map(&:to_s).include?(locale)
-      locale.empty? ? self.locale = nil : self.locale = I18n.default_locale
+    if locale
+      if !I18n.available_locales.map(&:to_s).include?(locale)
+        locale.empty? ? self.locale = nil : self.locale = I18n.default_locale
+      end
     end
   end
 end

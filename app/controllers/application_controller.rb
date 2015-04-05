@@ -12,19 +12,21 @@ class ApplicationController < ActionController::Base
         I18n.locale = current_user.locale
       else
         I18n.locale = http_accept_language.
-            compatible_language_from(I18n.available_locales)
+            compatible_language_from(I18n.available_locales) || I18n.default_locale
       end
     else
       if params[:user_locale]
-        I18n.available_locales.map(&:to_s).include?(params[:user_locale]) ?
-            I18n.locale = params[:user_locale] :
-            I18n.locale = I18n.default_locale
+        if I18n.available_locales.map(&:to_s).include?(params[:user_locale])
+          I18n.locale = params[:user_locale]
+        else
+          I18n.locale = I18n.default_locale
+        end
         session[:user_locale] = I18n.locale
       elsif session[:user_locale]
         I18n.locale = session[:user_locale]
       else
         I18n.locale = http_accept_language.
-            compatible_language_from(I18n.available_locales)
+            compatible_language_from(I18n.available_locales) || I18n.default_locale
       end
     end
   end
