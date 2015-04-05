@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
             length: { minimum: 3 }
   validates :password_confirmation, presence: true
   validates :email, uniqueness: true, presence: true,
-            format: { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
+            format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
   validates :locale, presence: true
   validate :locale_as_available
 
