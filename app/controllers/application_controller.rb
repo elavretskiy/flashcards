@@ -13,11 +13,9 @@ class ApplicationController < ActionController::Base
                params[:user_locale]
              elsif session[:locale]
                session[:locale]
+             else
+               http_accept_language.compatible_language_from(I18n.available_locales)
              end
-
-    unless locale
-      locale = http_accept_language.compatible_language_from(I18n.available_locales)
-    end
 
     if locale && I18n.available_locales.include?(locale.to_sym)
       session[:locale] = I18n.locale = locale

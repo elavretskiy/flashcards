@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :blocks, dependent: :destroy
   has_many :authentications, dependent: :destroy
   belongs_to :current_block, class_name: 'Block'
+  before_create :set_default_locale, on: :create
   before_validation :set_default_locale, on: :create
 
   accepts_nested_attributes_for :authentications
@@ -14,10 +15,10 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, presence: true,
             length: { minimum: 3 }
   validates :password_confirmation, presence: true
-  validates :email, uniqueness: true, presence: true
-  validates :locale, presence: true,
-            inclusion: { in: I18n.available_locales.map(&:to_s),
-                         message: 'Выберите локаль из выпадающего списка.' }
+  validates :email, uniqueness: true, presence: true,
+            format: { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
+  validates :locale, presence: true
+  validate :locale_as_available
 
   def has_linked_github?
     authentications.where(provider: 'github').present?
@@ -32,6 +33,12 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def locale_as_available
+    unless I18n.available_locales.include?(locale.to_sym)
+      errors.add(:locale, 'Выберите локаль из выпадающего списка.')
+    end
+  end
 
   def set_default_locale
     self.locale = I18n.locale
