@@ -17,8 +17,9 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   validates :email, uniqueness: true, presence: true,
             format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
-  validates :locale, presence: true
-  validate :locale_as_available
+  validates :locale, presence: true,
+            inclusion: { in: I18n.available_locales.map(&:to_s),
+                         message: 'Выберите локаль из выпадающего списка.' }
 
   def has_linked_github?
     authentications.where(provider: 'github').present?
@@ -34,13 +35,7 @@ class User < ActiveRecord::Base
 
   private
 
-  def locale_as_available
-    unless I18n.available_locales.include?(locale.to_sym)
-      errors.add(:locale, 'Выберите локаль из выпадающего списка.')
-    end
-  end
-
   def set_default_locale
-    self.locale = I18n.locale
+    self.locale = I18n.locale.to_s
   end
 end
