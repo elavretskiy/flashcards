@@ -10,23 +10,18 @@ class OauthsController < ApplicationController
   def callback
     provider = auth_params[:provider]
     if @user = login_from(provider)
-      redirect_to root_path,
-                  notice:
-                      "Вход из аккаунта #{provider.titleize} выполнен успешно."
+      redirect_to root_path, notice: (t 'log_in_is_successful_provider_notice',
+                                        provider: provider.titleize)
     else
       begin
         @user = create_from(provider)
-        # NOTE: this is the place to add '@user.activate!'
-        # if you are using user_activation submodule
-
         reset_session
         auto_login(@user)
-        redirect_to root_path,
-                    notice:
-                        "Вход из аккаунта #{provider.titleize} выполнен успешно."
+        redirect_to root_path, notice: (t 'log_in_is_successful_provider_notice',
+                                          provider: provider.titleize)
       rescue
-        redirect_to root_path,
-                    alert: "Вход из аккаунта #{provider.titleize} не выполнен ."
+        redirect_to root_path, alert: (t 'log_out_failed_provider_alert',
+                                         provider: provider.titleize)
       end
     end
   end

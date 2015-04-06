@@ -55,4 +55,7 @@ gem 'fog-aws'
 gem 'rails_12factor', group: :production
 gem 'levenshtein'
 gem 'whenever', require: false
+gem 'http_accept_language'
+gem 'routing-filter'
+
 ruby '2.1.5'

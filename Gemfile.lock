@@ -81,6 +81,7 @@ GEM
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
     hike (1.2.3)
+    http_accept_language (2.0.5)
     i18n (0.7.0)
     ipaddress (0.8.0)
     jbuilder (2.2.12)
@@ -140,6 +141,8 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    routing-filter (0.4.0.1)
+      actionpack (< 4.2)
     rspec-core (3.2.2)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
@@ -211,6 +214,7 @@ DEPENDENCIES
   faraday
   figaro
   fog-aws
+  http_accept_language
   jbuilder (~> 2.0)
   jquery-rails
   levenshtein
@@ -220,6 +224,7 @@ DEPENDENCIES
   rails (= 4.1.9)
   rails_12factor
   rake
+  routing-filter
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

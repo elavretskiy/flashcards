@@ -7,15 +7,15 @@ class UserSessionsController < ApplicationController
 
   def create
     if @user = login(params[:email], params[:password])
-      redirect_back_or_to root_path, notice: 'Вход выполнен успешно.'
+      redirect_back_or_to root_path, notice: t(:log_in_is_successful_notice)
     else
-      flash.now[:alert] = 'Вход не выполнен. Проверте вводимые E-mail и Пароль.'
+      flash.now[:alert] = t(:not_logged_in_alert)
       render action: 'new'
     end
   end
 
   def destroy
     logout
-    redirect_to login_path, notice: 'Выход выполнен успешно.'
+    redirect_to login_path, notice: t(:log_out_is_successful_notice)
   end
 end
