@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    redirect_to login_path, alert: 'Пожалуйста авторизуйтесь.'
+    redirect_to login_path, alert: t(:please_log_in)
   end
 
   def not_found
