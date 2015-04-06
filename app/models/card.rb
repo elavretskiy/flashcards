@@ -1,3 +1,5 @@
+require 'super_memo'
+
 class Card < ActiveRecord::Base
   belongs_to :user
   belongs_to :block
@@ -9,21 +11,31 @@ class Card < ActiveRecord::Base
   validates :user_id, presence: { message: 'Ошибка ассоциации.' }
   validates :block_id,
             presence: { message: 'Выберите колоду из выпадающего списка.' }
+  validates :interval, :repeat, :efactor, :quality, :attempt, presence: true
 
   mount_uploader :image, CardImageUploader
 
   scope :pending, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
+  scope :repeating, -> { where('quality < ?', 4).order('RANDOM()') }
 
   def check_translation(user_translation)
-    levenshtein_distance = Levenshtein.distance(full_downcase(translated_text),
-                                                full_downcase(user_translation))
+    distance = Levenshtein.distance(full_downcase(translated_text),
+                                    full_downcase(user_translation))
 
-    if levenshtein_distance <= 1
-      set_review_date_for_step
-      { state: true, distance: levenshtein_distance }
+    sm_hash = SuperMemo.new.algorithm(interval, repeat, efactor, set_quality(distance))
+
+    card_params = if distance <= 1
+                    { review_date: Time.now + interval.to_i.days, attempt: 1 }
+                  else
+                    { attempt: [attempt + 1, 5].min }
+                  end
+
+    update(card_params.merge(sm_hash))
+
+    if distance <= 1
+      { state: true, distance: distance }
     else
-      reset_review_step
-      { state: false, distance: levenshtein_distance }
+      { state: false, distance: distance }
     end
   end
 
@@ -38,32 +50,24 @@ class Card < ActiveRecord::Base
 
   protected
 
-  def reset_review_step
-    if review_attempt < 3
-      update_attributes(review_attempt: [review_attempt + 1, 3].min)
-    else
-      update_attributes(review_step: 1, review_attempt: 1)
-    end
+  def set_quality(distance)
+    self.quality = if distance <= 1
+                     case attempt
+                     when 1 then 5
+                     when 2 then 4
+                     else 3
+                     end
+                   else
+                     case attempt
+                     when 1 then 2
+                     when 2 then 1
+                     else 0
+                     end
+                   end
   end
 
   def set_review_date_as_now
     self.review_date = Time.now
-  end
-
-  def set_review_date_for_step
-    review_date_shift = case review_step
-                        when 1 then 12.hours
-                        when 2 then 3.days
-                        when 3 then 7.days
-                        when 4 then 14.days
-                        when 5 then 1.months
-                        end
-    update_review_params(Time.now + review_date_shift)
-  end
-
-  def update_review_params(date)
-    update_attributes(review_date: date, review_step: [review_step + 1, 5].min,
-                      review_attempt: 1)
   end
 
   def texts_are_not_equal
