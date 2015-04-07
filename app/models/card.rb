@@ -24,17 +24,13 @@ class Card < ActiveRecord::Base
 
     sm_hash = SuperMemo.new.algorithm(interval, repeat, efactor, set_quality(distance))
 
-    card_params = if distance <= 1
-                    { review_date: Time.now + interval.to_i.days, attempt: 1 }
-                  else
-                    { attempt: [attempt + 1, 5].min }
-                  end
-
-    update(card_params.merge(sm_hash))
-
     if distance <= 1
+      sm_hash.merge!({ review_date: Time.now + interval.to_i.days, attempt: 1 })
+      update(sm_hash)
       { state: true, distance: distance }
     else
+      sm_hash.merge!({ attempt: [attempt + 1, 5].min })
+      update(sm_hash)
       { state: false, distance: distance }
     end
   end

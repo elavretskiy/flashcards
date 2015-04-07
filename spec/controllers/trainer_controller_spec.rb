@@ -11,70 +11,159 @@ describe TrainerController do
         @controller.send(:auto_login, @user)
       end
 
-      it 'set review_date step=1' do
-        card = create_and_check_review_card(@user, @block, 1, 'house')
+      it 'repeat=1 quality=5' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 5)
+        card = check_review_card(card, 'house', 1)
         expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 12.hours).strftime('%Y-%m-%d %H:%M'))
+            to eq((Time.zone.now + 1.days).strftime('%Y-%m-%d %H:%M'))
+        expect(card.interval).to eq(6)
+        expect(card.repeat).to eq(2)
+        expect(card.attempt).to eq(1)
       end
 
-      it 'set review_step step=1' do
-        card = create_and_check_review_card(@user, @block, 1, 'house')
-        expect(card.review_step).to eq(2)
+      it 'repeat=1 quality=5' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 5)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(2.6)
+        expect(card.quality).to eq(5)
       end
 
-      it 'set review_date step=2' do
-        card = create_and_check_review_card(@user, @block, 2, 'house')
+      it 'repeat=1 quality=4' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 5)
+        card = check_review_card(card, 'RoR', 1)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(2.18)
+        expect(card.quality).to eq(4)
+      end
+
+      it 'repeat=1 quality=3' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 5)
+        card = check_review_card(card, 'RoR', 2)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(1.5)
+        expect(card.quality).to eq(3)
+      end
+
+      it 'repeat=1 quality=3' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 5)
+        card = check_review_card(card, 'RoR', 3)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(1.3)
+        expect(card.quality).to eq(3)
+      end
+
+      it 'repeat=2 quality=5' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 6, repeat: 2, efactor: 2.6, quality: 5)
+        card = check_review_card(card, 'house', 1)
         expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 3.days).strftime('%Y-%m-%d %H:%M'))
+            to eq((Time.zone.now + 6.days).strftime('%Y-%m-%d %H:%M'))
+        expect(card.interval).to eq(16)
+        expect(card.repeat).to eq(3)
+        expect(card.attempt).to eq(1)
       end
 
-      it 'set review_step step=2' do
-        card = create_and_check_review_card(@user, @block, 2, 'house')
-        expect(card.review_step).to eq(3)
+      it 'repeat=2 quality=5' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 6, repeat: 2, efactor: 2.6, quality: 5)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(2.7)
+        expect(card.quality).to eq(5)
       end
 
-      it 'set review_date step=3' do
-        card = create_and_check_review_card(@user, @block, 3, 'house')
+      it 'repeat=2 quality=4' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 6, repeat: 2, efactor: 2.6, quality: 5)
+        card = check_review_card(card, 'RoR', 1)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(2.28)
+        expect(card.quality).to eq(4)
+      end
+
+      it 'repeat=2 quality=3' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 6, repeat: 2, efactor: 2.6, quality: 5)
+        card = check_review_card(card, 'RoR', 2)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(1.6)
+        expect(card.quality).to eq(3)
+      end
+
+      it 'repeat=2 quality=3' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 6, repeat: 2, efactor: 2.6, quality: 5)
+        card = check_review_card(card, 'RoR', 3)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(1.3)
+        expect(card.quality).to eq(3)
+      end
+
+      it 'repeat=3 quality=5' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 16, repeat: 3, efactor: 2.7, quality: 5)
+        card = check_review_card(card, 'house', 1)
         expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 7.days).strftime('%Y-%m-%d %H:%M'))
+            to eq((Time.zone.now + 16.days).strftime('%Y-%m-%d %H:%M'))
+        expect(card.interval).to eq(45)
+        expect(card.repeat).to eq(4)
+        expect(card.attempt).to eq(1)
       end
 
-      it 'set review_step step=3' do
-        card = create_and_check_review_card(@user, @block, 3, 'house')
-        expect(card.review_step).to eq(4)
+      it 'repeat=3 quality=5' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 16, repeat: 3, efactor: 2.7, quality: 5)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(2.8)
+        expect(card.quality).to eq(5)
       end
 
-      it 'set review_date step=4' do
-        card = create_and_check_review_card(@user, @block, 4, 'house')
+      it 'repeat=3 quality=4' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 16, repeat: 3, efactor: 2.7, quality: 5)
+        card = check_review_card(card, 'RoR', 1)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(2.38)
+        expect(card.quality).to eq(4)
+      end
+
+      it 'repeat=3 quality=3' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 16, repeat: 3, efactor: 2.7, quality: 5)
+        card = check_review_card(card, 'RoR', 2)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(1.7)
+        expect(card.quality).to eq(3)
+      end
+
+      it 'repeat=3 quality=3' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 16, repeat: 3, efactor: 2.7, quality: 5)
+        card = check_review_card(card, 'RoR', 3)
+        card = check_review_card(card, 'house', 1)
+        expect(card.efactor).to eq(1.3)
+        expect(card.quality).to eq(3)
+      end
+
+      it 'repeat=1-3 quality=5' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 5)
+        card = check_review_card(card, 'house', 1)
+        card.update(review_date: Time.zone.now)
+        card = check_review_card(card, 'house', 1)
+        card.update(review_date: Time.zone.now)
+        card = check_review_card(card, 'house', 1)
         expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 14.days).strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step step=4' do
-        card = create_and_check_review_card(@user, @block, 4, 'house')
-        expect(card.review_step).to eq(5)
-      end
-
-      it 'set review_date step=5' do
-        card = create_and_check_review_card(@user, @block, 5, 'house')
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 1.months).strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step step=5' do
-        card = create_and_check_review_card(@user, @block, 5, 'house')
-        expect(card.review_step).to eq(5)
-      end
-
-      it 'set review_date step=1 levenshtein_distance=1' do
-        card = create_and_check_review_card(@user, @block, 1, 'hous')
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 12.hours).strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step step=1 levenshtein_distance=1' do
-        card = create_and_check_review_card(@user, @block, 5, 'hous')
-        expect(card.review_step).to eq(5)
+            to eq((Time.zone.now + 16.days).strftime('%Y-%m-%d %H:%M'))
+        expect(card.interval).to eq(45)
+        expect(card.repeat).to eq(4)
+        expect(card.attempt).to eq(1)
+        expect(card.efactor).to eq(2.8)
+        expect(card.quality).to eq(5)
       end
     end
 
@@ -85,176 +174,95 @@ describe TrainerController do
         @controller.send(:auto_login, @user)
       end
 
-      it 'set review_date try=1' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq(card.review_date.strftime('%Y-%m-%d %H:%M'))
+      it 'repeat=1 attempt=1' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 4)
+        card = check_review_card(card, 'RoR', 1)
+        expect(card.interval).to eq(1)
+        expect(card.repeat).to eq(1)
+        expect(card.attempt).to eq(2)
+        expect(card.efactor).to eq(2.18)
+        expect(card.quality).to eq(2)
       end
 
-      it 'set review_step try=1' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        expect(card.review_step).to eq(3)
+      it 'repeat=1 attempt=2' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 4)
+        card = check_review_card(card, 'RoR', 2)
+        expect(card.interval).to eq(1)
+        expect(card.repeat).to eq(1)
+        expect(card.attempt).to eq(3)
+        expect(card.efactor).to eq(1.64)
+        expect(card.quality).to eq(1)
       end
 
-      it 'set review_count try=1' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        expect(card.review_attempt).to eq(2)
-      end
-
-      it 'set review_date try=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 1)
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq(card.review_date.strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step try=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 1)
-        expect(card.review_step).to eq(3)
-      end
-
-      it 'set review_count try=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 1)
-        expect(card.review_attempt).to eq(3)
-      end
-
-      it 'set review_date try=3' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq(card.review_date.strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step try=3' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
-        expect(card.review_step).to eq(1)
-      end
-
-      it 'set review_count try=3' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
-        expect(card.review_attempt).to eq(1)
-      end
-
-      it 'set review_date try=4' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 3)
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq(card.review_date.strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step try=4' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 3)
-        expect(card.review_step).to eq(1)
-      end
-
-      it 'set review_count try=4' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 3)
-        expect(card.review_attempt).to eq(2)
-      end
-
-      it 'set review_count try=4' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 3)
-        expect(card.review_attempt).to eq(2)
-      end
-
-      it 'set review_date try=1 levenshtein_distance=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'hou')
-        expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq(card.review_date.strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step try=1 levenshtein_distance=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'hou')
-        expect(card.review_step).to eq(3)
-      end
-
-      it 'set review_count try=1 levenshtein_distance=2' do
-        card = create_and_check_review_card(@user, @block, 3, 'hou')
-        expect(card.review_attempt).to eq(2)
+      it 'repeat=1 attempt=3' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 4)
+        card = check_review_card(card, 'RoR', 3)
+        expect(card.interval).to eq(1)
+        expect(card.repeat).to eq(1)
+        expect(card.attempt).to eq(4)
+        expect(card.efactor).to eq(1.3)
+        expect(card.quality).to eq(0)
       end
     end
 
-    describe 'incorrect and correct translation' do
+    describe 'correct and incorrect translation' do
       before do
         @user = create(:user)
         @block = create(:block, user: @user)
         @controller.send(:auto_login, @user)
       end
 
-      it 'set review_date try=3' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 1)
+      it 'repeat=1-3 quality=4' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 4)
+        card = check_review_card(card, 'house', 1)
+        card.update(review_date: Time.zone.now)
+        card = check_review_card(card, 'house', 1)
+        card.update(review_date: Time.zone.now)
+        card = check_review_card(card, 'RoR', 1)
         card = check_review_card(card, 'house', 1)
         expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 7.days).strftime('%Y-%m-%d %H:%M'))
+            to eq((Time.zone.now + 1.days).strftime('%Y-%m-%d %H:%M'))
+        expect(card.interval).to eq(6)
+        expect(card.repeat).to eq(2)
+        expect(card.attempt).to eq(1)
+        expect(card.efactor).to eq(2.38)
+        expect(card.quality).to eq(4)
       end
 
-      it 'set review_step try=3' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 1)
+      it 'repeat=1-3 quality=5' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 1, repeat: 1, efactor: 2.5, quality: 4)
         card = check_review_card(card, 'house', 1)
-        expect(card.review_step).to eq(4)
-      end
-
-      it 'set review_count try=3' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 1)
+        card.update(review_date: Time.zone.now)
+        card = check_review_card(card, 'RoR', 1)
         card = check_review_card(card, 'house', 1)
-        expect(card.review_attempt).to eq(1)
-      end
-
-      it 'set review_date try=4' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
+        card.update(review_date: Time.zone.now)
         card = check_review_card(card, 'house', 1)
         expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 12.hours).strftime('%Y-%m-%d %H:%M'))
+            to eq((Time.zone.now + 6.days).strftime('%Y-%m-%d %H:%M'))
+        expect(card.interval).to eq(14)
+        expect(card.repeat).to eq(3)
+        expect(card.attempt).to eq(1)
+        expect(card.efactor).to eq(2.38)
+        expect(card.quality).to eq(5)
       end
 
-      it 'set review_step try=4' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
+      it 'repeat=3 attempt=4' do
+        card = create(:card, user: @user, block: @block,
+                      interval: 16, repeat: 3, efactor: 2.7, quality: 5)
+        card = check_review_card(card, 'RoR', 3)
         card = check_review_card(card, 'house', 1)
-        expect(card.review_step).to eq(2)
-      end
-
-      it 'set review_count try=4' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
-        card = check_review_card(card, 'house', 1)
-        expect(card.review_attempt).to eq(1)
-      end
-
-      it 'set review_date try=4+1' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
-        card = check_review_card(card, 'house', 1)
-        card = create_and_check_review_card(@user, @block, 1, 'house')
         expect(card.review_date.strftime('%Y-%m-%d %H:%M')).
-            to eq((Time.zone.now + 12.hours).strftime('%Y-%m-%d %H:%M'))
-      end
-
-      it 'set review_step try=4+1' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
-        card = check_review_card(card, 'house', 1)
-        card = create_and_check_review_card(@user, @block, 1, 'house')
-        expect(card.review_step).to eq(2)
-      end
-
-      it 'set review_count try=4+1' do
-        card = create_and_check_review_card(@user, @block, 3, 'car')
-        card = check_review_card(card, 'car', 2)
-        card = check_review_card(card, 'house', 1)
-        card = create_and_check_review_card(@user, @block, 1, 'house')
-        expect(card.review_attempt).to eq(1)
+            to eq((Time.zone.now + 1.days).strftime('%Y-%m-%d %H:%M'))
+        expect(card.interval).to eq(6)
+        expect(card.repeat).to eq(2)
+        expect(card.attempt).to eq(1)
+        expect(card.efactor).to eq(1.3)
+        expect(card.quality).to eq(3)
       end
     end
   end
