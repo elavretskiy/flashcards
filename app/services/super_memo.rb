@@ -14,8 +14,6 @@ class SuperMemo
     sm_hash.merge!(quality: quality)
   end
 
-  private
-
   def self.set_interval(interval, repeat, efactor)
     interval = case repeat
                when 1 then 1
