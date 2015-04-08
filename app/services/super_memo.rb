@@ -4,10 +4,6 @@
 
 class SuperMemo
   class << self
-    def [](interval, repeat, efactor, attempt, distance, distance_limit)
-      algorithm(interval, repeat, efactor, attempt, distance, distance_limit)
-    end
-
     def algorithm(interval, repeat, efactor, attempt, distance, distance_limit)
       quality = set_quality(attempt, distance, distance_limit)
       efactor = set_efactor(efactor, quality)
@@ -48,11 +44,5 @@ class SuperMemo
         end
       end
     end
-  end
-end
-
-module Kernel
-  def SuperMemo(interval, repeat, efactor, attempt, distance, distance_limit)
-    SuperMemo.algorithm(interval, repeat, efactor, attempt, distance, distance_limit)
   end
 end
