@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  respond_to :html
+  respond_to :js, :html
 
   def index
     if params[:id]
@@ -12,6 +12,11 @@ class HomeController < ApplicationController
         @card = current_user.cards.pending.first
         @card ||= current_user.cards.repeating.first
       end
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 end
