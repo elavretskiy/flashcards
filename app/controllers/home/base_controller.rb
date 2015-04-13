@@ -1,5 +1,5 @@
-class Home::ApplicationController < ActionController::Base
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+class Home::BaseController < ApplicationController
+rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   private
 

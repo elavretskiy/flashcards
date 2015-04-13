@@ -1,4 +1,4 @@
-class Home::UserSessionsController < ApplicationController
+class Home::UserSessionsController < Home::BaseController
   skip_before_action :require_login
 
   def new

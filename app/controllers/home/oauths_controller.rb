@@ -1,4 +1,4 @@
-class Home::OauthsController < ApplicationController
+class Home::OauthsController < Home::BaseController
   skip_before_action :require_login
 
   # sends the user on a trip to the provider,

@@ -1,4 +1,4 @@
-class Dashboard::ProfileController < ApplicationController
+class Dashboard::ProfileController < Dashboard::BaseController
   respond_to :html
 
   def edit

@@ -1,4 +1,4 @@
-class Dashboard::UsersController < ApplicationController
+class Dashboard::UsersController < Dashboard::BaseController
   def destroy
     current_user.destroy
     redirect_to login_path, notice: 'Пользователь успешно удален.'

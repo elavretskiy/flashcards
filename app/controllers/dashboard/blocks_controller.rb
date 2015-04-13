@@ -1,4 +1,4 @@
-class Dashboard::BlocksController < ApplicationController
+class Dashboard::BlocksController < Dashboard::BaseController
   before_action :set_block, only: [:destroy, :edit, :update, :set_as_current,
                                    :reset_as_current]
   respond_to :html
