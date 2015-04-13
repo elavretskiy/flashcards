@@ -57,5 +57,7 @@ gem 'levenshtein'
 gem 'whenever', require: false
 gem 'http_accept_language'
 gem 'routing-filter'
+gem 'rollbar'
+gem 'newrelic_rpm'
 
 ruby '2.1.5'
