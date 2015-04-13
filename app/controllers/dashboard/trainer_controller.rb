@@ -1,5 +1,24 @@
-class TrainerController < ApplicationController
-  respond_to :html
+class Dashboard::TrainerController < Dashboard::BaseController
+  respond_to :js, :html
+
+  def index
+    if params[:id]
+      @card = current_user.cards.find(params[:id])
+    else
+      if current_user.current_block
+        @card = current_user.current_block.cards.pending.first
+        @card ||= current_user.current_block.cards.repeating.first
+      else
+        @card = current_user.cards.pending.first
+        @card ||= current_user.cards.repeating.first
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   def review_card
     @card = current_user.cards.find(params[:card_id])
@@ -15,10 +34,10 @@ class TrainerController < ApplicationController
                           original_text: @card.original_text,
                           translated_text: @card.translated_text
       end
-      redirect_to root_path
+      redirect_to trainer_path
     else
       flash[:alert] = t(:incorrect_translation_alert)
-      redirect_to root_path(id: @card.id)
+      redirect_to trainer_path(id: @card.id)
     end
   end
 

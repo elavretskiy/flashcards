@@ -25,6 +25,7 @@ describe 'password authentication' do
 
     it 'e-mail has already been taken' do
       register('test@test.com', '12345', '12345', 'Зарегистрироваться')
+      click_link 'Выйти'
       register('test@test.com', '12345', '12345', 'Зарегистрироваться')
       expect(page).to have_content 'Не уникальное значение.'
     end
@@ -47,7 +48,7 @@ describe 'password authentication' do
     end
 
     it 'require_login root' do
-      expect(page).to have_content 'Пожалуйста авторизуйтесь.'
+      expect(page).to have_content 'Добро пожаловать.'
     end
 
     it 'authentication TRUE' do
@@ -81,7 +82,7 @@ describe 'password authentication' do
 
     it 'home page' do
       click_link 'en'
-      expect(page).to have_content 'Please log in.'
+      expect(page).to have_content 'Welcome.'
     end
 
     it 'register TRUE' do
