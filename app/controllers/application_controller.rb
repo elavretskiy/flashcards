@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
   protect_from_forgery with: :exception
   before_action :set_locale
   before_filter :require_login
@@ -30,10 +29,5 @@ class ApplicationController < ActionController::Base
 
   def not_authenticated
     redirect_to login_path, alert: t(:please_log_in)
-  end
-
-  def not_found
-    flash[:alert] = 'Вы обратились к несуществующей записи.'
-    redirect_to root_path
   end
 end

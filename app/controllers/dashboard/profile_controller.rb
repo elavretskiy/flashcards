@@ -1,4 +1,4 @@
-class ProfileController < ApplicationController
+class Dashboard::ProfileController < ApplicationController
   respond_to :html
 
   def edit
@@ -11,11 +11,6 @@ class ProfileController < ApplicationController
     else
       respond_with current_user
     end
-  end
-
-  def destroy
-    current_user.destroy
-    redirect_to login_path, notice: 'Пользователь успешно удален.'
   end
 
   private

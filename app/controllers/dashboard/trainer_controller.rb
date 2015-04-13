@@ -1,4 +1,4 @@
-class TrainerController < ApplicationController
+class Dashboard::TrainerController < ApplicationController
   respond_to :html
 
   def review_card

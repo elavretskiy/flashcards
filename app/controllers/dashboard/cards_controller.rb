@@ -1,4 +1,4 @@
-class CardsController < ApplicationController
+class Dashboard::CardsController < ApplicationController
   before_action :set_card, only: [:destroy, :edit, :update]
   respond_to :html
 

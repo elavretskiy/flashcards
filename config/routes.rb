@@ -3,27 +3,33 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  resources :cards
-  resources :user_sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :destroy]
+  scope module: 'home' do
+    resources :user_sessions, only: [:new, :create]
+    resources :users, only: [:new, :create]
+    get 'login' => 'user_sessions#new', :as => :login
 
-  resources :blocks do
-    member do
-      put 'set_as_current'
-      put 'reset_as_current'
-    end
+    post 'oauth/callback' => 'oauths#callback'
+    get 'oauth/callback' => 'oauths#callback'
+    get 'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
   end
 
-  put 'review_card' => 'trainer#review_card'
+  scope module: 'dashboard' do
+    resources :user_sessions, only: :destroy
+    resources :users, only: :destroy
+    post 'logout' => 'user_sessions#destroy', :as => :logout
 
-  get 'login' => 'user_sessions#new', :as => :login
-  post 'logout' => 'user_sessions#destroy', :as => :logout
+    resources :cards
 
-  post 'oauth/callback' => 'oauths#callback'
-  get 'oauth/callback' => 'oauths#callback'
-  get 'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
+    resources :blocks do
+      member do
+        put 'set_as_current'
+        put 'reset_as_current'
+      end
+    end
 
-  get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
-  put 'profile/:id' => 'profile#update', as: :profile
-  delete 'profile/:id' => 'profile#destroy'
+    put 'review_card' => 'trainer#review_card'
+
+    get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
+    put 'profile/:id' => 'profile#update', as: :profile
+  end
 end

@@ -18,7 +18,7 @@
             <% if current_user %>
               <%= link_to t(:user_profile_label), edit_profile_path(current_user),
                           class: 'navbar-link' %> |
-              <%= link_to t(:delete_user_label), profile_path(current_user),
+              <%= link_to t(:delete_user_label), user_path(current_user),
                           method: :delete, class: 'navbar-link',
                           data: { confirm: 'Удалить пользователя?' } %> |
               <%= link_to t(:log_out_label), :logout, method: :post,
