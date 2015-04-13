@@ -48,7 +48,7 @@ describe 'password authentication' do
     end
 
     it 'require_login root' do
-      expect(page).to have_content 'Пожалуйста авторизуйтесь.'
+      expect(page).to have_content 'Добро пожаловать.'
     end
 
     it 'authentication TRUE' do
@@ -82,7 +82,7 @@ describe 'password authentication' do
 
     it 'home page' do
       click_link 'en'
-      expect(page).to have_content 'Please log in.'
+      expect(page).to have_content 'Welcome.'
     end
 
     it 'register TRUE' do
