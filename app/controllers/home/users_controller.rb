@@ -1,5 +1,4 @@
 class Home::UsersController < Home::BaseController
-  skip_before_action :require_login, only: [:new, :create]
   respond_to :html
 
   def new

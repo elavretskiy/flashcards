@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   filter :locale
 
-  root 'home#index'
+  root 'main#index'
 
   scope module: 'home' do
     resources :user_sessions, only: [:new, :create]
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end
 
     put 'review_card' => 'trainer#review_card'
+    get 'trainer' => 'trainer#index'
 
     get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
     put 'profile/:id' => 'profile#update', as: :profile

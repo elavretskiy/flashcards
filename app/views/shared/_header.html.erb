@@ -3,7 +3,11 @@
     <nav class="navbar navbar-default" id="header">
       <div class="container-fluid">
         <div class="navbar-header">
-          <%= link_to t(:flashcards_label), root_path, class: "navbar-brand" %>
+          <% if current_user %>
+            <%= link_to t(:flashcards_label), trainer_path, class: "navbar-brand" %>
+          <% else %>
+            <%= link_to t(:flashcards_label), root_path, class: "navbar-brand" %>
+          <% end %>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <% if current_user %>

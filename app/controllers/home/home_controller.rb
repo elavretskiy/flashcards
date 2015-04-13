@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class Home::HomeController < Home::BaseController
   respond_to :js, :html
 
   def index
