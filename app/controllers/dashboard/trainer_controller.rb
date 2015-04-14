@@ -1,9 +1,10 @@
 class Dashboard::TrainerController < Dashboard::BaseController
+  before_action :set_card, only: [:review_card]
   respond_to :js, :html
 
   def index
     if params[:id]
-      @card = current_user.cards.find(params[:id])
+      set_card
     else
       if current_user.current_block
         @card = current_user.current_block.cards.pending.first
@@ -21,8 +22,6 @@ class Dashboard::TrainerController < Dashboard::BaseController
   end
 
   def review_card
-    @card = current_user.cards.find(params[:card_id])
-
     check_result = @card.check_translation(trainer_params[:user_translation])
 
     if check_result[:state]
@@ -42,6 +41,10 @@ class Dashboard::TrainerController < Dashboard::BaseController
   end
 
   private
+
+  def set_card
+    @card = current_user.cards.find(params[:id])
+  end
 
   def trainer_params
     params.permit(:user_translation)
