@@ -36,3 +36,15 @@
 .block_user_current_block_id {
   margin-left: 20px;
 }
+
+#flickr_image a {
+  margin-bottom: 15px;
+}
+
+#flickr_images {
+  margin-bottom: 0px;
+}
+
+#load_flickr_image, #load_local_image {
+  display: none;
+}

@@ -32,5 +32,7 @@ Rails.application.routes.draw do
 
     get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
     put 'profile/:id' => 'profile#update', as: :profile
+
+    get 'get_flickr_images' => 'flickr#get_flickr_images'
   end
 end

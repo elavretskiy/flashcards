@@ -13,7 +13,7 @@ class Card < ActiveRecord::Base
             presence: { message: 'Выберите колоду из выпадающего списка.' }
   validates :interval, :repeat, :efactor, :quality, :attempt, presence: true
 
-  mount_uploader :image, CardImageUploader
+  mount_uploader :image, CardImageAmazonUploader
 
   scope :pending, -> { where('review_date <= ?', Time.now).order('RANDOM()') }
   scope :repeating, -> { where('quality < ?', 4).order('RANDOM()') }

@@ -1,7 +1,5 @@
-class CardImageUploader < CarrierWave::Uploader::Base
+class CardImageAmazonUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-
-  storage :file
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}"
@@ -15,6 +13,10 @@ class CardImageUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    "#{model.id}.#{file.extension.downcase}" if original_filename
+    if original_filename
+      filename = original_filename.downcase + Time.now.to_s
+      @name ||= Digest::MD5.hexdigest(filename).first(5)
+      "#{@name}.#{file.extension.downcase}"
+    end
   end
 end

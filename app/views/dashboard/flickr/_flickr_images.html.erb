@@ -1,0 +1,10 @@
+<div class="row">
+  <% flickr_images.each do |flickr_images| %>
+    <div class="col-xs-3 col-md-2" id="flickr_image">
+      <a href="#inline" class="thumbnail"
+         onclick="$('#remote_image_url input').val('<%= flickr_images.url_m %>');">
+        <%= image_tag flickr_images.url_sq %>
+      </a>
+    </div>
+  <% end %>
+</div>

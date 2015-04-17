@@ -49,7 +49,8 @@ gem 'faraday'
 gem 'figaro'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'fog-aws'
+gem 'fog'
+gem 'excon', '~> 0.45.2'
 gem 'rails_12factor', group: :production
 gem 'levenshtein'
 gem 'whenever', require: false
@@ -58,5 +59,6 @@ gem 'routing-filter'
 gem 'rollbar'
 gem 'newrelic_rpm'
 gem 'responders', '~> 2.0'
+gem 'flickraw'
 
 ruby '2.1.5'

@@ -17,13 +17,13 @@
 
     <div class="form-group">
       <%= label_tag '', t(:original_text_label) %>
-      <%= text_area_tag '', card.original_text, class: 'form-control',
+      <%= text_field_tag '', card.original_text, class: 'form-control',
                         disabled: true %>
     </div>
 
     <div class="form-group">
       <%= label_tag '', t(:translated_text_label) %>
-      <%= text_area_tag :user_translation, nil, class: 'form-control',
+      <%= text_field_tag :user_translation, nil, class: 'form-control',
                         required: true, autofocus: true %>
     </div>
 
