@@ -3,7 +3,7 @@ class Dashboard::TrainerController < Dashboard::BaseController
   respond_to :js, :html
 
   def index
-    if params[:id]
+    if params[:card_id]
       set_card
     else
       if current_user.current_block
@@ -36,14 +36,14 @@ class Dashboard::TrainerController < Dashboard::BaseController
       redirect_to trainer_path
     else
       flash[:alert] = t(:incorrect_translation_alert)
-      redirect_to trainer_path(id: @card.id)
+      redirect_to trainer_path(card_id: @card.id)
     end
   end
 
   private
 
   def set_card
-    @card = current_user.cards.find(params[:id])
+    @card = current_user.cards.find(params[:card_id])
   end
 
   def trainer_params
