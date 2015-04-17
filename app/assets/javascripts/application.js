@@ -30,5 +30,5 @@ window.onload=function(){
         $('#load_local_image').show();
         $('#remote_image_url input').val('');
     });
-}
+};
 

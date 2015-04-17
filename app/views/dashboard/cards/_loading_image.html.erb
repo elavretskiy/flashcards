@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group" xmlns="http://www.w3.org/1999/html">
   <%= label_tag 'Загрузка изображения' %>
   <div class="form-group">
     <label class="radio-inline">
@@ -14,7 +14,7 @@
 
 <div class="form-group" id="load_local_image">
   <%= f.input :image, as: :file, label: 'Изображение на компьютере' %>
-  <%= f.input :image_cache, as: :hidden %>
+
 </div>
 
 <div id="load_flickr_image">
@@ -25,10 +25,10 @@
         <div class="input-group">
           <input type="text" class="form-control" name="flickr_search"
                  placeholder="Что ищем?">
-      <span class="input-group-btn">
-        <%= link_to 'Искать на flickr.com', get_flickr_images_path, remote: true,
-                    class: 'btn btn-default', id: 'flickr_search_link' %>
-      </span>
+			      <span class="input-group-btn">
+			        <%= link_to 'Искать на flickr.com', get_flickr_images_path, remote: true,
+			                    class: 'btn btn-default', id: 'flickr_search_link' %>
+			      </span>
         </div>
       </div>
     </div>

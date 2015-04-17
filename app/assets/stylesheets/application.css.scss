@@ -26,7 +26,7 @@
 }
 
 .card_image p {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .card_remove_image {
@@ -42,9 +42,10 @@
 }
 
 #flickr_images {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
-#load_flickr_image, #load_local_image {
+#load_flickr_image,
+#load_local_image {
   display: none;
 }

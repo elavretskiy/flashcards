@@ -1,5 +1,5 @@
 <%= simple_form_for card do |f| %>
-  <% if card.image? %>
+  <% if card.image?%>
     <div class="form-group">
       <%= f.input :remove_image, as: :boolean, label: 'Удалить изображение' %>
       <div class="row">
