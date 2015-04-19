@@ -2,13 +2,20 @@ require 'rubygems'
 require 'fog'
 
 CarrierWave.configure do |config|
-  # Configuration for Amazon S3
-  config.fog_credentials = {
+  if ENV['S3_KEY'].present? && ENV['S3_SECRET'].present?
+    config.fog_credentials = {
       provider: 'AWS',
       aws_access_key_id: ENV['S3_KEY'],
       aws_secret_access_key: ENV['S3_SECRET'],
       region: ENV['S3_REGION']
-  }
+    }
+  else
+    config.fog_credentials = {
+      provider: 'AWS',
+      use_iam_profile: true,
+      region: ENV['S3_REGION']
+    }
+  end
 
   # For testing, upload files to local `tmp` folder.
   if Rails.env.test? || Rails.env.cucumber?
