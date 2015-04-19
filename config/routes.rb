@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   filter :locale
 
-  root 'main#index'
+  root 'application#index'
+  post 'invite_friends' => 'application#invite_friends'
 
   scope module: 'home' do
     resources :user_sessions, only: [:new, :create]

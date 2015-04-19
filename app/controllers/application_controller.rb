@@ -2,6 +2,29 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
 
+  respond_to :html, :js
+
+  def index
+  end
+
+  def invite_friends
+    emails = params[:emails].split(',')
+    emails.each do |email|
+      if !email[/\A([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})\z/i]
+        flash.now[:alert] = 'Проверьте формат вводимых данных.'
+        flash.now[:notice] = nil
+      end
+    end
+
+    if !flash[:alert]
+      UserInterfaceMailer.invite_friends(params[:emails]).deliver
+      flash.now[:notice] = 'Ваши друзья успешно приглашены на сайт.'
+      @attr_class = ''
+    else
+      @attr_class = 'field_with_errors'
+    end
+  end
+
   private
 
   def set_locale
