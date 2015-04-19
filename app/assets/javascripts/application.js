@@ -14,21 +14,21 @@
 //= require jquery_ujs
 //= require_tree .
 
-window.onload=function(){
-    $('#flickr_search_link').click(function() {
-        this.href += '?search=' + $('input[name=flickr_search]').val();
-    });
+$(function(){
+  $('#flickr_search_link').click(function() {
+    this.href += '?search=' + $('input[name=flickr_search]').val();
+  });
 
-    $('#inlineRadio2').click(function() {
-        $('#load_flickr_image').show();
-        $('#load_local_image').hide();
-        $('#card_image').val('');
-    });
+  $('#inlineRadio2').click(function() {
+    $('#load_flickr_image').show();
+    $('#load_local_image').hide();
+    $('#card_image').val('');
+  });
 
-    $('#inlineRadio1').click(function() {
-        $('#load_flickr_image').hide();
-        $('#load_local_image').show();
-        $('#remote_image_url input').val('');
-    });
-};
+  $('#inlineRadio1').click(function() {
+    $('#load_flickr_image').hide();
+    $('#load_local_image').show();
+    $('#remote_image_url input').val('');
+  });
+});
 

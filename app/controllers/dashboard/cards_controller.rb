@@ -1,3 +1,5 @@
+require 'super_memo_service'
+
 class Dashboard::CardsController < Dashboard::BaseController
   before_action :set_card, only: [:destroy, :edit, :update]
   respond_to :html
@@ -33,6 +35,12 @@ class Dashboard::CardsController < Dashboard::BaseController
   def destroy
     @card.destroy
     respond_with @card
+  end
+
+  def get_flickr_images
+    @flickr_images = FlickrService.search_photos(params[:search],
+                                                 '1, 2, 3, 4, 5, 6, 7',
+                                                 'url_sq, url_m', 10, 1)
   end
 
   private

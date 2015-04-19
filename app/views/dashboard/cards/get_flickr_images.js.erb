@@ -1,0 +1,2 @@
+$('a#flickr_search_link').attr('href', '<%= get_flickr_images_cards_path %>');
+$('#flickr_images').html('<%= escape_javascript render('flickr_images', flickr_images: @flickr_images) %>');

@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     resources :users, only: :destroy
     post 'logout' => 'user_sessions#destroy', :as => :logout
 
-    resources :cards
+    resources :cards do
+      get 'get_flickr_images', on: :collection
+    end
 
     resources :blocks do
       member do
@@ -32,7 +34,5 @@ Rails.application.routes.draw do
 
     get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
     put 'profile/:id' => 'profile#update', as: :profile
-
-    get 'get_flickr_images' => 'flickr#get_flickr_images'
   end
 end

@@ -2,7 +2,7 @@
 # involving the calculation of easiness factors for particular items:
 # http://www.supermemo.com/english/ol/sm2.htm
 
-class SuperMemo
+class SuperMemoService
   class << self
     def algorithm(interval, repeat, efactor, attempt, distance, distance_limit)
       quality = set_quality(attempt, distance, distance_limit)

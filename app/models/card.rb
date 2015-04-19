@@ -1,4 +1,4 @@
-require 'super_memo'
+require 'super_memo_service'
 
 class Card < ActiveRecord::Base
   belongs_to :user
@@ -22,7 +22,7 @@ class Card < ActiveRecord::Base
     distance = Levenshtein.distance(full_downcase(translated_text),
                                     full_downcase(user_translation))
 
-    sm_hash = SuperMemo.algorithm(interval, repeat, efactor, attempt, distance, 1)
+    sm_hash = SuperMemoService.algorithm(interval, repeat, efactor, attempt, distance, 1)
 
     if distance <= 1
       sm_hash.merge!({ review_date: Time.now + interval.to_i.days, attempt: 1 })
