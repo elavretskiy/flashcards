@@ -1,0 +1,48 @@
+<div class="form-group" xmlns="http://www.w3.org/1999/html">
+  <%= label_tag 'Загрузка изображения' %>
+  <div class="form-group">
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+      Компьютер
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+      flickr.com
+    </label>
+  </div>
+</div>
+
+<div class="form-group" id="load_local_image">
+  <%= f.input :image, as: :file, label: 'Изображение на компьютере' %>
+
+</div>
+
+<div id="load_flickr_image">
+  <div class="form-group">
+    <%= label_tag 'Изображение на flickr.com' %>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" class="form-control" name="flickr_search"
+                 placeholder="Что ищем?">
+			      <span class="input-group-btn">
+			        <%= link_to 'Искать на flickr.com', get_flickr_images_cards_path,
+			                    remote: true, class: 'btn btn-default',
+			                    id: 'flickr_search_link' %>
+			      </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" id="flickr_images">
+  </div>
+
+  <div class="form-group" id="remote_image_url">
+    <%= f.input :remote_image_url, as: :string,
+                label: 'Адрес изображения на flickr.com',
+                input_html: { class: 'form-control' },
+                placeholder: 'Найдите изображение на flickr.com и выберите понравившееся' %>
+    <%= f.input :image_cache, as: :hidden %>
+  </div>
+</div>

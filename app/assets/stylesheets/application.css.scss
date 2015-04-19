@@ -26,7 +26,7 @@
 }
 
 .card_image p {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .card_remove_image {
@@ -35,4 +35,17 @@
 
 .block_user_current_block_id {
   margin-left: 20px;
+}
+
+#flickr_image a {
+  margin-bottom: 15px;
+}
+
+#flickr_images {
+  margin-bottom: 0;
+}
+
+#load_flickr_image,
+#load_local_image {
+  display: none;
 }
