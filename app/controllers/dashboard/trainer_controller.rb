@@ -14,11 +14,6 @@ class Dashboard::TrainerController < Dashboard::BaseController
         @card ||= current_user.cards.repeating.first
       end
     end
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def review_card

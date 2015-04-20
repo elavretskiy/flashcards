@@ -1,5 +1,5 @@
 class Dashboard::ProfileController < Dashboard::BaseController
-  respond_to :html
+  respond_to :html, :js
 
   def edit
   end
@@ -20,6 +20,11 @@ class Dashboard::ProfileController < Dashboard::BaseController
     else
       flash.now[:alert] = 'Проверьте формат вводимых данных: ' + @incorrect_emails + '.'
       flash.now[:notice] = nil
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
