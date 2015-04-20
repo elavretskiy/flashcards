@@ -47,6 +47,6 @@ class Dashboard::TrainerController < Dashboard::BaseController
   end
 
   def trainer_params
-    params.permit(:user_translation)
+    params.require(:review_card).permit(:user_translation)
   end
 end
