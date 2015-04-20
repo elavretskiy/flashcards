@@ -33,7 +33,7 @@ $(function(){
     $('#remote_image_url input').val('');
   });
 
-  $('#exampleModal').on('shown.bs.modal', function() {
+  $('#modalInviteFriends').on('shown.bs.modal', function() {
     $(this).find('textarea:first').focus();
   });
 });

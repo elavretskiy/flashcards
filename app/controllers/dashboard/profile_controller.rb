@@ -13,10 +13,28 @@ class Dashboard::ProfileController < Dashboard::BaseController
     end
   end
 
+  def invite_friends
+    @incorrect_emails = FriendsService.invite(invite_friends_emails)
+    if @incorrect_emails.blank?
+      flash.now[:notice] = 'Ваши друзья успешно приглашены на сайт.'
+    else
+      flash.now[:alert] = 'Проверьте формат вводимых данных: ' + @incorrect_emails + '.'
+      flash.now[:notice] = nil
+    end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
                                  :locale)
+  end
+
+  def invite_friends_params
+    params.require(:invite_friends).permit(:emails)
+  end
+
+  def invite_friends_emails
+    invite_friends_params[:emails].gsub(' ', '').split(',')
   end
 end

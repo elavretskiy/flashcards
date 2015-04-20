@@ -7,20 +7,6 @@ class ApplicationController < ActionController::Base
   def index
   end
 
-  def invite_friends
-    invite_friends = params.require(:invite_friends).permit(:emails)
-
-    emails = invite_friends[:emails]
-    emails = emails.gsub(' ', '').split(',')
-
-    if @invite_friends_state = FriendsService.invite(emails)
-      flash.now[:notice] = 'Ваши друзья успешно приглашены на сайт.'
-    else
-      flash.now[:alert] = 'Проверьте формат вводимых данных.'
-      flash.now[:notice] = nil
-    end
-  end
-
   private
 
   def set_locale

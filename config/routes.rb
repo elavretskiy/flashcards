@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   filter :locale
 
   root 'application#index'
-  post 'invite_friends' => 'application#invite_friends'
 
   scope module: 'home' do
     resources :user_sessions, only: [:new, :create]
@@ -35,5 +34,6 @@ Rails.application.routes.draw do
 
     get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
     put 'profile/:id' => 'profile#update', as: :profile
+    post 'invite_friends' => 'profile#invite_friends', as: :invite_friends
   end
 end
