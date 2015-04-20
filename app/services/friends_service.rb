@@ -2,15 +2,11 @@ class FriendsService
   class << self
     def invite(emails)
       @incorrect_emails = ''
-      emails.delete_if do |email|
+      emails = emails.select do |email|
         if email[/\A([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})\z/i]
-          User.exists?(email: email)
+          User.exists?(email: email) ? false : true
         else
-          @incorrect_emails += if @incorrect_emails.blank?
-                                 email
-                               else
-                                 ', ' + email
-                               end
+          @incorrect_emails += @incorrect_emails.blank? ? email : (', ' + email)
         end
       end
 
