@@ -1,4 +1,5 @@
-<div class="modal fade" id="modalInviteFriends" tabindex="-1" role="dialog" aria-labelledby="modalInviteFriendsLabel" aria-hidden="true">
+<div class="modal fade" id="modal_invite_friends" tabindex="-1" role="dialog"
+     aria-labelledby="modal_invite_friends_label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -6,15 +7,14 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h2 class="modal-title" id="exampleModalLabel">Пригласить друзей</h2>
+        <h2 class="modal-title" id="modal_invite_friends_label">Пригласить друзей</h2>
       </div>
 
       <div class="modal-body">
         <div id="modal_notice_block" class="row">
         </div>
 
-        <%= form_tag invite_friends_path, method: :post, remote: true,
-                     authenticity_token: true do %>
+        <%= form_tag invite_friends_path, method: :post, remote: true do %>
           <div class="form-group">
             <%= label_tag '', 'Список адресов электронной почты:',
                           class: 'control-label' %>
@@ -30,9 +30,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"
-                id="close_modal_invite_friends">
-          Закрыть
-        </button>
+                id="close_modal_invite_friends">Закрыть</button>
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@ class Dashboard::ProfileController < Dashboard::BaseController
   end
 
   def invite_friends
-    @incorrect_emails = FriendsService.invite(invite_friends_emails)
+    @incorrect_emails = FriendsService.invite(invite_friends_params[:emails])
     if @incorrect_emails.blank?
       flash.now[:notice] = 'Ваши друзья успешно приглашены на сайт.'
     else
@@ -36,10 +36,8 @@ class Dashboard::ProfileController < Dashboard::BaseController
   end
 
   def invite_friends_params
-    params.require(:invite_friends).permit(:emails)
-  end
-
-  def invite_friends_emails
-    invite_friends_params[:emails].gsub(' ', '').split(',')
+    parameters = params.require(:invite_friends).permit(:emails)
+    parameters[:emails] = parameters[:emails].gsub(' ', '').split(',')
+    parameters
   end
 end
