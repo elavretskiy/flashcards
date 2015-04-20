@@ -38,6 +38,7 @@ en:
   please_log_in: 'Please log in.'
   invite_friends: 'Invite friends'
   locale: 'Locale'
+  authorization: 'Aauthorization'
 
   activerecord:
       errors:
