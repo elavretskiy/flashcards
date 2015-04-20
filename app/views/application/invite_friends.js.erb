@@ -1,2 +1,8 @@
 $('#modal_notice_block').html('<%= escape_javascript render('shared/alert_notice') %>');
-$('#friends_emails').attr('class', '<%= @attr_class.to_s %>')
+$('#friends_emails').attr('class', '<%= @attr_class.to_s %>');
+
+<% if @attr_class.blank? %>
+	$('#close_modal_invite_friends').focus();
+<% else %>
+	$('#exampleModal textarea:first').focus();
+<% end %>

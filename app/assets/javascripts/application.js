@@ -31,5 +31,9 @@ $(function(){
     $('#load_local_image').show();
     $('#remote_image_url input').val('');
   });
+
+  $('#exampleModal').on('shown.bs.modal', function() {
+    $(this).find('textarea:first').focus();
+  });
 });
 
