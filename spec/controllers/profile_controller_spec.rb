@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe Dashboard::ProfileController do
   describe 'invite friends' do
-    describe 'deliveries' do
-      before do
-        @user = create(:user)
-        @controller.send(:auto_login, @user)
-      end
+    before do
+      @user = create(:user)
+      @controller.send(:auto_login, @user)
+    end
 
+    describe 'deliveries count' do
       it 'one correct email' do
         post :invite_friends, { format: 'js', invite_friends: { emails: 'one@test.com' } }
         expect(ActionMailer::Base.deliveries.count).to eql(1)
@@ -34,8 +34,6 @@ describe Dashboard::ProfileController do
 
     describe 'mail params' do
       before do
-        @user = create(:user)
-        @controller.send(:auto_login, @user)
         post :invite_friends, { format: 'js', invite_friends: { emails: 'one@test.com' } }
         @mail = ActionMailer::Base.deliveries.last
       end
@@ -50,6 +48,26 @@ describe Dashboard::ProfileController do
 
       it 'subject' do
         expect(@mail.subject).to eql('Приглашаем Вас на сайт flashcards.')
+      end
+    end
+
+    describe 'emails string incorrect separator' do
+      it 'dot' do
+        post :invite_friends, { format: 'js', invite_friends:
+                              { emails: 'one@test.com. two@test.com' } }
+        expect(ActionMailer::Base.deliveries.count).to eql(7)
+      end
+
+      it 'semicolon' do
+        post :invite_friends, { format: 'js', invite_friends:
+                              { emails: 'one@test.com; two@test.com' } }
+        expect(ActionMailer::Base.deliveries.count).to eql(7)
+      end
+
+      it 'spaces' do
+        post :invite_friends, { format: 'js', invite_friends:
+                              { emails: 'one@test.com two@test.com' } }
+        expect(ActionMailer::Base.deliveries.count).to eql(7)
       end
     end
   end
