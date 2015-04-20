@@ -10,7 +10,10 @@ class ApplicationController < ActionController::Base
   def invite_friends
     invite_friends = params.require(:invite_friends).permit(:emails)
 
-    if @invite_friends_state = UserInterfaceService.invite_friends(invite_friends[:emails])
+    emails = invite_friends[:emails]
+    emails = emails.gsub(' ', '').split(',')
+
+    if @invite_friends_state = FriendsService.invite(emails)
       flash.now[:notice] = 'Ваши друзья успешно приглашены на сайт.'
     else
       flash.now[:alert] = 'Проверьте формат вводимых данных.'

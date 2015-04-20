@@ -2,8 +2,8 @@ $('#modal_notice_block').html('<%= escape_javascript render('shared/alert_notice
 
 <% if @invite_friends_state %>
   $('#close_modal_invite_friends').focus();
-  $('#friends_emails').attr('class', 'field_with_errors');
+  $('#friends_emails').attr('class', '');
 <% else %>
   $('#exampleModal textarea:first').focus();
-  $('#friends_emails').attr('class', '');
+  $('#friends_emails').attr('class', 'field_with_errors');
 <% end %>
