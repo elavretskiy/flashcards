@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   end
 
   def invite_friends
-    emails = params[:emails].split(',')
+    emails = params[:emails].delete ' '
+    emails = emails.split(',')
     emails.each do |email|
       if !email[/\A([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})\z/i]
         flash.now[:alert] = 'Проверьте формат вводимых данных.'
@@ -16,7 +17,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    if !flash[:alert]
+    unless flash[:alert]
       UserInterfaceMailer.invite_friends(params[:emails]).deliver
       flash.now[:notice] = 'Ваши друзья успешно приглашены на сайт.'
       @attr_class = ''
