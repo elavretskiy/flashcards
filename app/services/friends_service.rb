@@ -14,7 +14,7 @@ class FriendsService
         end
       end
 
-      emails.each { |email| FriendsMailer.invite(email).deliver_now } if @emails_correct
+      emails.each { |email| FriendsMailer.invite(email).deliver_now } if @incorrect_emails.blank?
       @incorrect_emails
     end
   end
