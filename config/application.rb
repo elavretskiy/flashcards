@@ -38,7 +38,6 @@ module Flashcards
     }
     config.action_mailer.default_options = { from: ENV['DEFAULT_EMAIL'] }
 
-    config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL_OPTIONS_HOST'],
-                                                 port: ENV['DEFAULT_URL_OPTIONS_HOST'] }
+    config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL_OPTIONS_HOST'] }
   end
 end
