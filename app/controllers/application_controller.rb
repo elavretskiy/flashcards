@@ -4,9 +4,6 @@ class ApplicationController < ActionController::Base
 
   respond_to :html, :js
 
-  def index
-  end
-
   private
 
   def set_locale
