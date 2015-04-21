@@ -39,7 +39,7 @@ describe Dashboard::ProfileController do
       end
 
       it 'from' do
-        expect(@mail.from).to eql ['cards@flashcards.com']
+        expect(@mail.from).to eql ['info@flashcards.com']
       end
 
       it 'to' do
