@@ -26,15 +26,17 @@ module Flashcards
     config.i18n.default_locale = :ru
     config.i18n.available_locales = [:ru, :en]
 
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      authentication: ENV['SMTP_SETTINGS_AUTHENTICATION'],
-      address: ENV['SMTP_SETTINGS_ADDRESS'],
-      port: ENV['SMTP_SETTINGS_PORT'],
-      domain: ENV['SMTP_SETTINGS_DOMAIN'],
-      user_name: ENV['SMTP_SETTINGS_USER_NAME'],
-      password: ENV['SMTP_SETTINGS_PASSWORD']
-    }
+    unless Rails.env.test? || Rails.env.cucumber?
+      config.action_mailer.delivery_method = :smtp
+      config.action_mailer.smtp_settings = {
+        authentication: ENV['SMTP_SETTINGS_AUTHENTICATION'],
+        address: ENV['SMTP_SETTINGS_ADDRESS'],
+        port: ENV['SMTP_SETTINGS_PORT'],
+        domain: ENV['SMTP_SETTINGS_DOMAIN'],
+        user_name: ENV['SMTP_SETTINGS_USER_NAME'],
+        password: ENV['SMTP_SETTINGS_PASSWORD']
+      }
+    end
 
     config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL_OPTIONS_HOST'],
                                                  port: ENV['DEFAULT_URL_OPTIONS_HOST'] }
