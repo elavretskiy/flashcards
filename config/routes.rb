@@ -34,5 +34,6 @@ Rails.application.routes.draw do
 
     get 'profile/:id/edit' => 'profile#edit', as: :edit_profile
     put 'profile/:id' => 'profile#update', as: :profile
+    post 'invite_friends' => 'profile#invite_friends', as: :invite_friends
   end
 end

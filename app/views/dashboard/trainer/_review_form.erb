@@ -23,8 +23,8 @@
 
     <div class="form-group">
       <%= label_tag '', t(:translated_text_label) %>
-      <%= text_field_tag :user_translation, nil, class: 'form-control',
-                        required: true, autofocus: true %>
+      <%= text_field_tag 'review_card[user_translation]', nil,
+                         class: 'form-control', required: true, autofocus: true %>
     </div>
 
     <%= submit_tag t(:check_card_button), class: 'btn btn-default' %>

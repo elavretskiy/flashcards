@@ -13,12 +13,12 @@ en:
   sing_up_label: 'Sing up'
   log_in_label: 'Log in'
   sing_in_label: 'Sing in'
-  all_decks_label: 'All deck'
+  all_decks_label: 'List of decks'
   add_deck_label: 'Add deck'
-  all_cards_label: 'All cards'
+  all_cards_label: 'List of cards'
   add_card_label: 'Add card'
-  user_profile_label: 'User profile'
-  delete_user_label: 'Delete user'
+  user_profile_label: 'Profile'
+  delete_user_label: 'Delete'
   log_out_label: 'Log out'
   user_created_successfully_notice: 'User created successfully.'
   please_log_in_alert: 'Please log in.'
@@ -26,7 +26,7 @@ en:
   log_in_is_successful_notice: 'Login is successful.'
   not_logged_in_alert: 'Not logged in. Check the input E-mail and Password.'
   flashcards_label: 'Flashcards'
-  log_in_with_github_label: 'Log in with Github'
+  log_in_with_github_label: 'Log in with GitHub'
   correct_translation_notice: 'You have entered the correct translation. Keep It Up.'
   incorrect_translation_alert: 'You entered an invalid translation. Please try again.'
   translation_from_misprint_alert: "You entered translation from misprint.
@@ -36,6 +36,9 @@ en:
   log_out_is_successful_notice: 'Log out is successful.'
   log_out_failed_provider_alert: "Log out of your account %{provider} failed."
   please_log_in: 'Please log in.'
+  invite_friends: 'Invite friends'
+  locale: 'Locale'
+  authorization: 'Aauthorization'
 
   activerecord:
       errors:

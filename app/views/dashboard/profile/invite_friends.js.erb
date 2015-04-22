@@ -1,0 +1,9 @@
+$('#modal_notice_block').html('<%= escape_javascript render('shared/alert_notice') %>');
+
+<% if @incorrect_emails.blank? %>
+  $('#close_modal_invite_friends').focus();
+  $('#friends_emails').attr('class', '');
+<% else %>
+  $('#modal_invite_friends textarea:first').focus();
+  $('#friends_emails').attr('class', 'field_with_errors');
+<% end %>

@@ -60,5 +60,6 @@ gem 'rollbar'
 gem 'newrelic_rpm'
 gem 'responders', '~> 2.0'
 gem 'flickraw'
+gem 'bootstrap-sass'
 
 ruby '2.1.5'

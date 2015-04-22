@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery
+//= require bootstrap-sprockets
 //= require_tree .
 
 $(function(){
@@ -29,6 +31,10 @@ $(function(){
     $('#load_flickr_image').hide();
     $('#load_local_image').show();
     $('#remote_image_url input').val('');
+  });
+
+  $('#modal_invite_friends').on('shown.bs.modal', function() {
+    $(this).find('textarea:first').focus();
   });
 });
 

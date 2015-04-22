@@ -13,13 +13,13 @@
   <%= render 'shared/header' %>
   <div class="row" id="middle">
     <div id="notice_block">
-    <%= render 'shared/alert_notice' %>
+      <%= render 'shared/alert_notice' %>
+    </div>
+    <div class="col-sm-12">
+      <%= yield %>
+    </div>
+    <%= render 'shared/modal_invite_friends' %>
   </div>
-  <div class="col-sm-12">
-    <%= yield %>
-  </div>
-</div>
-
 </div>
 </body>
 </html>
