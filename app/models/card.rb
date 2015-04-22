@@ -3,7 +3,6 @@ require 'super_memo_service'
 class Card < ActiveRecord::Base
   belongs_to :user
   belongs_to :block
-  validates :user_id, presence: true
   before_validation :set_review_date_as_now, on: :create
   validate :texts_are_not_equal
   validates :original_text, :translated_text, :review_date,

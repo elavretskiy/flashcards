@@ -15,7 +15,6 @@ class Ability
       can :manage, Role, name: ['admin', 'user']
       can :manage, Block
       can :manage, Card
-    else
     end
   end
 end

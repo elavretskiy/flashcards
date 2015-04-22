@@ -1,17 +1,67 @@
 ActiveAdmin.register User do
+  index do
+    selectable_column
+    column :id
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if resource.something?
-#   permitted
-# end
+    column 'Role' do |user|
+      user.roles.first.name
+    end
 
+    column :email
+    column :current_block
+    column :locale
+    actions
+  end
 
+  show do
+    attributes_table do
+      row :id
+      row 'Role' do |user|
+        user.roles.first.name
+      end
+      row :email
+      row :current_block
+      row :locale
+    end
+    active_admin_comments
+  end
+
+  form do |f|
+    inputs do
+      input :roles, label: 'Role', as: :select,
+            collection: Role.all.order(name: :asc), include_blank: true,
+            input_html: {name: 'role_id', multiple: false}
+
+      input :current_block
+      input :locale, as: :select, collection: I18n.available_locales
+      input :email
+      input :password
+      input :password_confirmation
+    end
+    actions
+  end
+
+  controller do
+    def update
+      user = User.find(params[:id])
+
+      if user.update(user_params)
+        if role = Role.find_by(id: params[:role_id])
+          user.roles.each { |role| user.remove_role role.name }
+          user.add_role role.name
+        end
+      end
+      super
+    end
+
+    private
+
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation,
+                                   :locale)
+    end
+  end
+
+  permit_params :email, :password, :password_confirmation, :locale, :current_block_id,
+                :role_id
 end
