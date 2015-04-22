@@ -39,6 +39,7 @@ ru:
   invite_friends: 'Пригласить друзей'
   locale: 'Локаль'
   authorization: 'Авторизация'
+  administration: 'Администрирование'
 
   activerecord:
     errors:
