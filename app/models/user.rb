@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     update_attribute(:current_block_id, nil)
   end
 
+  def display_name
+    email
+  end
+
   private
 
   def set_default_locale
