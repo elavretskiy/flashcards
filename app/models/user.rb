@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   belongs_to :current_block, class_name: 'Block'
   before_create :set_default_locale
   before_validation :set_default_locale, on: :create
+  after_validation :set_role, on: :create
 
   accepts_nested_attributes_for :authentications
 
@@ -38,5 +39,9 @@ class User < ActiveRecord::Base
 
   def set_default_locale
     self.locale = I18n.locale.to_s
+  end
+
+  def set_role
+    self.add_role :user
   end
 end

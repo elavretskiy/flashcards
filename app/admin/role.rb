@@ -19,9 +19,35 @@ ActiveAdmin.register Role do
   form do |f|
     inputs do
       input :name
-      input :resource_type, as: :select, collection: Rolify.resource_types
+
+      input :resource_type, as: :select, include_blank: true,
+            collection: Rolify.resource_types
     end
     actions
+  end
+
+  controller do
+    def update
+      if role_params[:resource_type].blank?
+        params[:role][:resource_type] = nil
+      end
+
+      super
+    end
+
+    def create
+      if role_params[:resource_type].blank?
+        params[:role][:resource_type] = nil
+      end
+
+      super
+    end
+
+    private
+
+    def role_params
+      params.require(:role).permit(:name, :resource_type)
+    end
   end
 
   permit_params :name, :resource_type

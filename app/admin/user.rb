@@ -4,7 +4,7 @@ ActiveAdmin.register User do
     column :id
 
     column 'Role' do |user|
-      user.roles.first.name
+      user.roles.first.name if user.roles.first
     end
 
     column :email
@@ -17,7 +17,7 @@ ActiveAdmin.register User do
     attributes_table do
       row :id
       row 'Role' do |user|
-        user.roles.first.name
+        user.roles.first.name if user.roles.first
       end
       row :email
       row :current_block
@@ -28,8 +28,9 @@ ActiveAdmin.register User do
 
   form do |f|
     inputs do
-      input :roles, label: 'Role', as: :select,
-            collection: Role.all.order(name: :asc), include_blank: true,
+      input :roles, label: 'Role',
+            as: :select, include_blank: true,
+            collection: Role.all.order(name: :asc),
             input_html: {name: 'role_id', multiple: false}
 
       input :current_block
@@ -43,13 +44,10 @@ ActiveAdmin.register User do
 
   controller do
     def update
-      user = User.find(params[:id])
-
-      if user.update(user_params)
-        if role = Role.find_by(id: params[:role_id])
-          user.roles.each { |role| user.remove_role role.name }
-          user.add_role role.name
-        end
+      if role = Role.find_by(id: params[:role_id])
+        user = User.find(params[:id])
+        user.roles.each { |role| user.remove_role role.name }
+        user.add_role role.name
       end
       super
     end
@@ -58,10 +56,10 @@ ActiveAdmin.register User do
 
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation,
-                                   :locale)
+                                   :locale, :current_block_id)
     end
   end
 
-  permit_params :email, :password, :password_confirmation, :locale, :current_block_id,
-                :role_id
+  permit_params :email, :password, :password_confirmation, :locale,
+                :current_block_id, :role_id
 end
