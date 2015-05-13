@@ -3,6 +3,7 @@ class Block < ActiveRecord::Base
   belongs_to :user
 
   validates :title, presence: { message: 'Необходимо заполнить поле.' }
+  validates :user_id, presence: { message: 'Ошибка ассоциации.' }
 
   def current?
     id == user.current_block_id

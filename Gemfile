@@ -61,5 +61,8 @@ gem 'newrelic_rpm'
 gem 'responders', '~> 2.0'
 gem 'flickraw'
 gem 'bootstrap-sass'
+gem 'activeadmin', github: 'activeadmin'
+gem 'rolify'
+gem 'cancancan', '~> 1.10'
 
 ruby '2.1.5'

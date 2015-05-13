@@ -73,6 +73,11 @@
               <li>
                 <%= link_to t(:invite_friends), '#', data: { toggle: 'modal', target: '#modal_invite_friends' } %>
               </li>
+              <% if (current_user.has_role? :admin) || (current_user.has_role? :super) %>
+                <li>
+                  <%= link_to t(:administration), :admin_root %>
+                </li>
+              <% end %>
               <li>
                 <%= link_to t(:log_out_label), :logout, method: :post %>
               </li>

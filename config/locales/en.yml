@@ -39,6 +39,7 @@ en:
   invite_friends: 'Invite friends'
   locale: 'Locale'
   authorization: 'Aauthorization'
+  administration: 'Administration'
 
   activerecord:
       errors:
