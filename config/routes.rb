@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  filter :locale
+
   ActiveAdmin.routes(self)
 
-  filter :locale
+  mount News::Engine => "/news"
 
   root 'main#index'
 

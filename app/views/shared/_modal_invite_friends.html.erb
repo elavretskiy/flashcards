@@ -14,7 +14,7 @@
         <div id="modal_notice_block" class="row">
         </div>
 
-        <%= form_tag invite_friends_path, method: :post, remote: true do %>
+        <%= form_tag main_app.invite_friends_path, method: :post, remote: true do %>
           <div class="form-group">
             <%= label_tag '', 'Список адресов электронной почты:',
                           class: 'control-label' %>

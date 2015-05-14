@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery
 //= require bootstrap-sprockets
+//= require ckeditor/init
 //= require_tree .
 
 $(function(){
@@ -37,4 +37,3 @@ $(function(){
     $(this).find('textarea:first').focus();
   });
 });
-

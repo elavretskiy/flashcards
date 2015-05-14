@@ -40,6 +40,8 @@ ru:
   locale: 'Локаль'
   authorization: 'Авторизация'
   administration: 'Администрирование'
+  news: 'Новости'
+  access_error: 'Ошибка доступа.'
 
   activerecord:
     errors:

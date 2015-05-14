@@ -15,6 +15,12 @@ class Ability
       can :manage, Role, name: ['admin', 'user']
       can :manage, Block
       can :manage, Card
+
+      can :manage, News::Article
+    elsif user.has_role? :newsmaker
+      can :manage, News::Article
+    elsif user.has_role? :user
+      can :read, News::Article
     end
   end
 end
