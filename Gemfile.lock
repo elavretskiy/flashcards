@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: add0928290f38545ba9cad3d183e886838ff9962
+  revision: 9941609e040df391264de5b50eed08d5391a79f5
   specs:
     activeadmin (1.0.0.pre1)
       arbre (~> 1.0, >= 1.0.2)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/elavretskiy/news.git
-  revision: 49c6cf88ecca7ba0ef4e0a8dacc1da9316e5559c
+  revision: f4de4dc687a577585152ec6436300f9e5ad7a685
   specs:
     news (0.0.1)
       bootstrap-sass
@@ -284,7 +284,7 @@ GEM
       multi_xml (~> 0.5)
       rack (~> 1.2)
     orm_adapter (0.5.0)
-    pg (0.18.1)
+    pg (0.18.2)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     rack (1.6.1)
@@ -331,7 +331,7 @@ GEM
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rolify (4.0.0)
-    rollbar (1.5.1)
+    rollbar (1.5.2)
       multi_json (~> 1.3)
     routing-filter (0.5.0)
       actionpack (~> 4.2)
@@ -353,7 +353,7 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
-    ruby-debug-ide (0.4.30)
+    ruby-debug-ide (0.4.31)
       rake (>= 0.8.1)
     sass (3.2.19)
     sass-rails (4.0.5)

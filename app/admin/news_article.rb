@@ -1,5 +1,7 @@
 if defined?(ActiveAdmin)
   ActiveAdmin.register News::Article, as: 'News' do
+    config.batch_actions = false
+
     index do
       selectable_column
       column :id
@@ -12,7 +14,7 @@ if defined?(ActiveAdmin)
       attributes_table do
         row :id
         row :title
-        row (:text)  { |article| raw(article.text) }
+        row (:text) { |article| raw(article.text) }
         row :text
       end
     end
@@ -21,7 +23,7 @@ if defined?(ActiveAdmin)
       inputs do
         input :title
         input :annonce
-        input :text, :input_html => { class: 'ckeditor' }
+        input :text, input_html: { class: 'ckeditor' }
       end
       actions
     end
@@ -32,7 +34,7 @@ if defined?(ActiveAdmin)
         @article.save
         redirect_to admin_news_index_path
       end
-      
+
       def update
         @article = News::Article.find(params[:id])
         @article.update(article_params)

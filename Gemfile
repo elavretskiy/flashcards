@@ -38,10 +38,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'debase'
+  gem 'ruby-debug-ide'
 end
-
-gem 'debase'
-gem 'ruby-debug-ide'
 
 gem 'rake'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
