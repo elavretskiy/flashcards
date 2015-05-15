@@ -15,7 +15,6 @@ if defined?(ActiveAdmin)
         row :id
         row :title
         row (:text) { |article| raw(article.text) }
-        row :text
       end
     end
 
