@@ -38,7 +38,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'debase'
+  gem 'ruby-debug-ide'
 end
+
 gem 'rake'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'simple_form'
@@ -64,5 +67,9 @@ gem 'bootstrap-sass'
 gem 'activeadmin', github: 'activeadmin'
 gem 'rolify'
 gem 'cancancan', '~> 1.10'
+gem 'ckeditor'
+gem 'kaminari'
+
+gem 'news', git: 'https://github.com/elavretskiy/news.git'
 
 ruby '2.1.5'

@@ -40,6 +40,8 @@ en:
   locale: 'Locale'
   authorization: 'Aauthorization'
   administration: 'Administration'
+  news: 'News'
+  access_error: 'Access error.'
 
   activerecord:
       errors:

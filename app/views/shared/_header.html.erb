@@ -12,14 +12,21 @@
             <span class="icon-bar"></span>
           </button>
           <% if current_user %>
-            <%= link_to t(:flashcards_label), trainer_path, class: "navbar-brand" %>
+            <%= link_to t(:flashcards_label), main_app.trainer_path, class: "navbar-brand" %>
           <% else %>
-            <%= link_to t(:flashcards_label), root_path, class: "navbar-brand" %>
+            <%= link_to t(:flashcards_label), main_app.root_path, class: "navbar-brand" %>
           <% end %>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
+
+            <% if defined?(News) %>
+              <li>
+                <%= link_to t(:news), news.articles_path %>
+              </li>
+            <% end %>
+
             <li class="dropdown">
               <% if current_user %>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -28,10 +35,10 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <%= link_to t(:all_decks_label), blocks_path %>
+                    <%= link_to t(:all_decks_label), main_app.blocks_path %>
                   </li>
                   <li>
-                    <%= link_to t(:add_deck_label), new_block_path %>
+                    <%= link_to t(:add_deck_label), main_app.new_block_path %>
                   </li>
                 </ul>
               <% end %>
@@ -44,10 +51,10 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <%= link_to t(:all_cards_label), cards_path %>
+                    <%= link_to t(:all_cards_label), main_app.cards_path %>
                   </li>
                   <li>
-                    <%= link_to t(:add_card_label), new_card_path %>
+                    <%= link_to t(:add_card_label), main_app.new_card_path %>
                   </li>
                 </ul>
               <% end %>
@@ -62,11 +69,11 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <%= link_to t(:user_profile_label), edit_profile_path(current_user) %>
+                    <%= link_to t(:user_profile_label), main_app.edit_profile_path(current_user) %>
                   </li>
                   <li>
-                    <%= link_to t(:delete_user_label), user_path(current_user),
-                                  method: :delete, data: { confirm: 'Удалить пользователя?' } %>
+                    <%= link_to t(:delete_user_label), main_app.user_path(current_user),
+                                method: :delete, data: { confirm: 'Удалить пользователя?' } %>
                   </li>
                 </ul>
               </li>
@@ -75,11 +82,11 @@
               </li>
               <% if (current_user.has_role? :admin) || (current_user.has_role? :super) %>
                 <li>
-                  <%= link_to t(:administration), :admin_root %>
+                  <%= link_to t(:administration), main_app.admin_root_path %>
                 </li>
               <% end %>
               <li>
-                <%= link_to t(:log_out_label), :logout, method: :post %>
+                <%= link_to t(:log_out_label), main_app.logout_path, method: :post %>
               </li>
             <% else %>
               <li class="dropdown">
@@ -89,7 +96,7 @@
                 <ul class="dropdown-menu" role="menu">
                   <% I18n.available_locales.each do |locale| %>
                     <li>
-                      <%=link_to locale, root_path(user_locale: locale) %>
+                      <%=link_to locale, main_app.root_path(user_locale: locale) %>
                     </li>
                   <% end %>
                 </ul>
@@ -101,13 +108,13 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <%= link_to t(:log_in_label), :login %>
+                    <%= link_to t(:log_in_label), main_app.login_path %>
                   </li>
                   <li>
-                    <%= link_to t(:log_in_with_github_label), auth_at_provider_path(provider: :github) %>
+                    <%= link_to t(:log_in_with_github_label), main_app.auth_at_provider_path(provider: :github) %>
                   </li>
                   <li>
-                    <%= link_to t(:sing_up_label), new_user_path %>
+                    <%= link_to t(:sing_up_label), main_app.new_user_path %>
                   </li>
                 </ul>
               </li>
