@@ -12,9 +12,9 @@
             <span class="icon-bar"></span>
           </button>
           <% if current_user %>
-            <%= link_to t(:flashcards_label), main_app.trainer_path, class: "navbar-brand" %>
+            <%= link_to t(:flashcards), main_app.trainer_path, class: "navbar-brand" %>
           <% else %>
-            <%= link_to t(:flashcards_label), main_app.root_path, class: "navbar-brand" %>
+            <%= link_to t(:flashcards), main_app.root_path, class: "navbar-brand" %>
           <% end %>
         </div>
 
@@ -35,10 +35,10 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <%= link_to t(:all_decks_label), main_app.blocks_path %>
+                    <%= link_to t(:all_decks), main_app.blocks_path %>
                   </li>
                   <li>
-                    <%= link_to t(:add_deck_label), main_app.new_block_path %>
+                    <%= link_to t(:add_deck), main_app.new_block_path %>
                   </li>
                 </ul>
               <% end %>
@@ -51,10 +51,13 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <%= link_to t(:all_cards_label), main_app.cards_path %>
+                    <%= link_to t(:all_cards), main_app.cards_path %>
                   </li>
                   <li>
-                    <%= link_to t(:add_card_label), main_app.new_card_path %>
+                    <%= link_to t(:add_card), main_app.new_card_path %>
+                  </li>
+                  <li>
+                    <%= link_to t(:parse_html), '#', data: { toggle: 'modal', target: '#modal_parsing_html' } %>
                   </li>
                 </ul>
               <% end %>
@@ -69,10 +72,10 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <%= link_to t(:user_profile_label), main_app.edit_profile_path(current_user) %>
+                    <%= link_to t(:user_profile), main_app.edit_profile_path(current_user) %>
                   </li>
                   <li>
-                    <%= link_to t(:delete_user_label), main_app.user_path(current_user),
+                    <%= link_to t(:delete_user), main_app.user_path(current_user),
                                 method: :delete, data: { confirm: 'Удалить пользователя?' } %>
                   </li>
                 </ul>
@@ -86,7 +89,7 @@
                 </li>
               <% end %>
               <li>
-                <%= link_to t(:log_out_label), main_app.logout_path, method: :post %>
+                <%= link_to t(:log_out), main_app.logout_path, method: :post %>
               </li>
             <% else %>
               <li class="dropdown">
@@ -108,13 +111,13 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <%= link_to t(:log_in_label), main_app.login_path %>
+                    <%= link_to t(:log_in), main_app.login_path %>
                   </li>
                   <li>
-                    <%= link_to t(:log_in_with_github_label), main_app.auth_at_provider_path(provider: :github) %>
+                    <%= link_to t(:log_in_with_github), main_app.auth_at_provider_path(provider: :github) %>
                   </li>
                   <li>
-                    <%= link_to t(:sing_up_label), main_app.new_user_path %>
+                    <%= link_to t(:sing_up), main_app.new_user_path %>
                   </li>
                 </ul>
               </li>

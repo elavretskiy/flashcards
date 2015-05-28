@@ -1,5 +1,5 @@
 <% if card %>
-  <h2><%= t(:current_card_label) %></h2>
+  <h2><%= t(:current_card) %></h2>
 
   <%= form_tag review_card_path(card_id: card.id), method: :put, remote: true do %>
 
@@ -16,13 +16,13 @@
     <% end %>
 
     <div class="form-group">
-      <%= label_tag '', t(:original_text_label) %>
+      <%= label_tag '', t(:original_text) %>
       <%= text_field_tag '', card.original_text, class: 'form-control',
                         disabled: true %>
     </div>
 
     <div class="form-group">
-      <%= label_tag '', t(:translated_text_label) %>
+      <%= label_tag '', t(:translated_text) %>
       <%= text_field_tag 'review_card[user_translation]', nil,
                          class: 'form-control', required: true, autofocus: true %>
     </div>

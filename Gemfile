@@ -69,6 +69,8 @@ gem 'rolify'
 gem 'cancancan', '~> 1.10'
 gem 'ckeditor'
 gem 'kaminari'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 gem 'news', git: 'https://github.com/elavretskiy/news.git'
 

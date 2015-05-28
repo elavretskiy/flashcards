@@ -1,4 +1,6 @@
 require 'super_memo_service'
+require 'nokogiri'
+require 'open-uri'
 
 class Dashboard::CardsController < Dashboard::BaseController
   before_action :set_card, only: [:destroy, :edit, :update]
@@ -43,6 +45,34 @@ class Dashboard::CardsController < Dashboard::BaseController
                                                  'url_sq, url_m', 10, 1)
   end
 
+  def parsing_html
+    url = parsing_html_params[:url]
+    css_original = parsing_html_params[:css_original]
+    css_translated = parsing_html_params[:css_translated]
+
+    html = Nokogiri::HTML(open(url))
+    original_texts = html.css(css_original)
+    translated_texts = html.css(css_translated)
+
+    if original_texts.size == translated_texts.size && original_texts.size != 0
+      if original_texts[0] != translated_texts[0]
+        block_id = parsing_html_params[:block_id]
+
+        Card.delay.create_delayed_job(current_user.id, block_id, url,
+                                      css_original, css_translated)
+
+        flash.now[:notice] = 'Задача на парсинг сайта успешно поставлена в очередь.'
+      end
+    else
+      flash.now[:alert] = 'Парсинг сайта прошел неудачно. Проверьте правильность введенных селекторов.'
+      flash.now[:notice] = nil
+    end
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def set_card
@@ -53,5 +83,9 @@ class Dashboard::CardsController < Dashboard::BaseController
     params.require(:card).permit(:original_text, :translated_text, :review_date,
                                  :image, :image_cache, :remove_image, :block_id,
                                  :remote_image_url)
+  end
+
+  def parsing_html_params
+    params.require(:parsing_html).permit(:block_id, :url, :css_original, :css_translated)
   end
 end

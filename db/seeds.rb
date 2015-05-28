@@ -8,9 +8,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require 'nokogiri'
-require 'open-uri'
-
 if (User.with_role :super).blank?
   user = User.create! email: 'super@super.com', password: 'super',
                       password_confirmation: 'super', locale: 'ru'

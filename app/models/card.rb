@@ -43,6 +43,22 @@ class Card < ActiveRecord::Base
     end
   end
 
+  def self.create_delayed_job(user_id, block_id, url, css_original, css_translated)
+    html = Nokogiri::HTML(open(url))
+
+    original_texts = html.css(css_original)
+    translated_texts = html.css(css_translated)
+
+    original_texts.each_with_index do |original, index|
+      original_text = original.content.downcase
+      translated_text = translated_texts[index].content.downcase
+      card = Card.new(original_text: original_text,
+                      translated_text: translated_text,
+                      user_id: user_id, block_id: block_id)
+      card.save
+    end
+  end
+
   protected
 
   def set_review_date_as_now

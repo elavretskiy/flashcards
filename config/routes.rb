@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     resources :cards do
       get 'get_flickr_images', on: :collection
+      post 'parsing_html', on: :collection
     end
 
     resources :blocks do
