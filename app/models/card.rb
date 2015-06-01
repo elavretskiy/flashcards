@@ -49,14 +49,7 @@ class Card < ActiveRecord::Base
     original_texts = html.css(css_original)
     translated_texts = html.css(css_translated)
 
-    original_texts.each_with_index do |original, index|
-      original_text = original.content.downcase
-      translated_text = translated_texts[index].content.downcase
-      card = Card.new(original_text: original_text,
-                      translated_text: translated_text,
-                      user_id: user_id, block_id: block_id)
-      card.save
-    end
+    CardsService.create_cards(user_id, block_id, original_texts, translated_texts)
   end
 
   protected

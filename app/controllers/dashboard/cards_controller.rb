@@ -46,25 +46,16 @@ class Dashboard::CardsController < Dashboard::BaseController
   end
 
   def parsing_html
-    url = parsing_html_params[:url]
-    css_original = parsing_html_params[:css_original]
-    css_translated = parsing_html_params[:css_translated]
+    @parse = CardsService.parsing_html(current_user.id,
+                                      parsing_html_params[:block_id],
+                                      parsing_html_params[:url],
+                                      parsing_html_params[:css_original],
+                                      parsing_html_params[:css_translated])
 
-    html = Nokogiri::HTML(open(url))
-    original_texts = html.css(css_original)
-    translated_texts = html.css(css_translated)
-
-    if original_texts.size == translated_texts.size && original_texts.size != 0
-      if original_texts[0] != translated_texts[0]
-        block_id = parsing_html_params[:block_id]
-
-        Card.delay.create_delayed_job(current_user.id, block_id, url,
-                                      css_original, css_translated)
-
-        flash.now[:notice] = 'Задача на парсинг сайта успешно поставлена в очередь.'
-      end
+    if @parse
+      flash.now[:notice] = 'Задача на парсинг сайта успешно поставлена в очередь.'
     else
-      flash.now[:alert] = 'Парсинг сайта прошел неудачно. Проверьте правильность введенных селекторов.'
+      flash.now[:alert] = 'Проверьте правильность введенных данных.'
       flash.now[:notice] = nil
     end
 

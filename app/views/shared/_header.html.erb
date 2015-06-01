@@ -31,7 +31,7 @@
               <% if current_user %>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                    role="button" aria-expanded="false">
-                  Колоды<span class="caret"></span>
+                  <%= t(:decks)%><span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
@@ -47,7 +47,7 @@
             <li class="dropdown">
               <% if current_user %>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                  Карточки<span class="caret"></span>
+                  <%= t(:cards) %><span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
@@ -68,7 +68,7 @@
             <% if current_user %>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                  Пользователь<span class="caret"></span>
+                  <%= t(:user)%><span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
