@@ -1,9 +1,9 @@
 $('#modal_notice_block_parsing_html').html('<%= escape_javascript render('shared/alert_notice') %>');
 
 <% if @parse %>
-$('#close_modal_parsing_html').focus();
-$('.modal_parsing_html_field_with_errors').attr('class', '');
+  $('#close_modal_parsing_html').focus();
+  $('.modal_parsing_html_field_with_errors').attr('class', '');
 <% else %>
-$('#modal_parsing_html textarea:first').focus();
-$('.modal_parsing_html_field_with_errors').attr('class', 'field_with_errors');
+  $('#modal_parsing_html textarea:first').focus();
+  $('.modal_parsing_html_field_with_errors').attr('class', 'field_with_errors');
 <% end %>

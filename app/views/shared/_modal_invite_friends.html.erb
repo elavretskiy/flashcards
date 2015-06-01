@@ -7,7 +7,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h2 class="modal-title" id="modal_invite_friends">Пригласить друзей</h2>
+        <h2 class="modal-title">Пригласить друзей</h2>
       </div>
 
       <div class="modal-body">
@@ -19,9 +19,8 @@
             <%= label_tag '', 'Список адресов электронной почты:',
                           class: 'control-label' %>
             <div id="modal_invite_friends_emails">
-            <%= text_area_tag 'invite_friends[emails]', nil, class: 'form-control',
-                               required: true, autofocus: true,
-                               placeholder: 'Введите адреса электронной почты через запятую.' %>
+            <%= text_area_tag 'invite_friends[emails]', nil, class: 'form-control', required: true,
+                              placeholder: 'Введите адреса электронной почты через запятую.' %>
             </div>
           </div>
           <%= submit_tag 'Пригласить', class: 'btn btn-primary' %>

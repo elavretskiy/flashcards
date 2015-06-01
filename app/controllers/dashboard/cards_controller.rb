@@ -47,10 +47,10 @@ class Dashboard::CardsController < Dashboard::BaseController
 
   def parsing_html
     @parse = CardsService.parsing_html(current_user.id,
-                                      parsing_html_params[:block_id],
-                                      parsing_html_params[:url],
-                                      parsing_html_params[:css_original],
-                                      parsing_html_params[:css_translated])
+                                       parsing_html_params[:block_id],
+                                       parsing_html_params[:url],
+                                       parsing_html_params[:css_original],
+                                       parsing_html_params[:css_translated])
 
     if @parse
       flash.now[:notice] = 'Задача на парсинг сайта успешно поставлена в очередь.'

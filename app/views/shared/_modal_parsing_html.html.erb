@@ -7,7 +7,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h2 class="modal-title" id="modal_parsing_html">Парсинг HTML</h2>
+        <h2 class="modal-title">Парсинг HTML</h2>
       </div>
 
       <div class="modal-body">
@@ -21,8 +21,7 @@
                           class: 'control-label' %>
             <div class="modal_parsing_html_field_with_errors">
               <%= text_field_tag 'parsing_html[url]', nil, class: 'form-control',
-                                 required: true, autofocus: true,
-                                 placeholder: 'Введите адреса сайта.' %>
+                                 required: true, placeholder: 'Введите адреса сайта.' %>
             </div>
           </div>
 
@@ -30,8 +29,8 @@
             <%= label_tag '', 'CSS селектор оригинала:',
                           class: 'control-label' %>
             <div class="modal_parsing_html_field_with_errors">
-              <%= text_field_tag 'parsing_html[css_original]', nil, class: 'form-control',
-                                 required: true,
+              <%= text_field_tag 'parsing_html[css_original]', nil,
+                                 class: 'form-control', required: true,
                                  placeholder: 'Введите CSS селектор оригинала.' %>
             </div>
           </div>
@@ -40,8 +39,8 @@
             <%= label_tag '', 'CSS селектор перевода:',
                           class: 'control-label' %>
             <div class="modal_parsing_html_field_with_errors">
-              <%= text_field_tag 'parsing_html[css_translated]', nil, class: 'form-control',
-                                 required: true,
+              <%= text_field_tag 'parsing_html[css_translated]', nil,
+                                 class: 'form-control', required: true,
                                  placeholder: 'Введите CSS селектор перевода.' %>
             </div>
           </div>
