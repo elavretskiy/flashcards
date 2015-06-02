@@ -4,6 +4,6 @@ $('#modal_notice_block_invite_friends').html('<%= escape_javascript render('shar
   $('#close_modal_invite_friends').focus();
   $('#modal_invite_friends_emails').attr('class', '');
 <% else %>
-  $("#modal_parsing_html input:text").first().focus();
+  $('#modal_invite_friends textarea:first').focus();
   $('#modal_invite_friends_emails').attr('class', 'field_with_errors');
 <% end %>

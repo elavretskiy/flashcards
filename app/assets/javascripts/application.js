@@ -38,6 +38,6 @@ $(function(){
   });
 
   $('#modal_parsing_html').on('shown.bs.modal', function() {
-    $("#modal_parsing_html input:text").first().focus();
+    $('#modal_parsing_html input:text').first().focus();
   });
 });

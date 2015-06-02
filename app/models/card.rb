@@ -43,8 +43,8 @@ class Card < ActiveRecord::Base
     end
   end
 
-  def self.create_delayed_job(user_id, block_id, original_texts, translated_texts)
-    CardsService.create_cards(user_id, block_id, original_texts, translated_texts)
+  def self.create_cards_from_html(user_id, block_id, original_texts, translated_texts)
+    CardsService.create_cards_from_html(user_id, block_id, original_texts, translated_texts)
   end
 
   protected
