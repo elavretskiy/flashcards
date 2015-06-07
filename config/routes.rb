@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  mount News::Engine => "/news"
+  mount News::Engine => "/"
 
   root 'main#index'
 
@@ -41,4 +41,9 @@ Rails.application.routes.draw do
     put 'profile/:id' => 'profile#update', as: :profile
     post 'invite_friends' => 'profile#invite_friends', as: :invite_friends
   end
+
+  root to: redirect("/#{I18n.locale}", status: 302), as: :redirected_root
+  get "/*path", to: redirect("/#{I18n.locale}/%{path}", status: 302),
+      constraints: {path: /(?!(#{I18n.available_locales.join("|")})\/).*/},
+      format: false
 end

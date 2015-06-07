@@ -45,7 +45,7 @@ en:
   authorization: 'Aauthorization'
   administration: 'Administration'
   news: 'News'
-  access_error: 'Access error.'
+  access_error: 'Вы не авторизованы для выполнения этого действия.'
 
   activerecord:
       errors:

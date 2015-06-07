@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
 
   respond_to :html, :js
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to login_path, :alert => exception.message
+  end
+
   private
 
   def set_locale
@@ -22,10 +26,6 @@ class ApplicationController < ActionController::Base
     else
       session[:locale] = I18n.locale = I18n.default_locale
     end
-  end
-
-  def default_url_options(options = {})
-    { locale: I18n.locale }.merge options
   end
 
   def access_denied(exception)

@@ -72,6 +72,6 @@ gem 'kaminari'
 gem 'delayed_job_active_record'
 gem 'daemons'
 
-gem 'news', git: 'https://github.com/elavretskiy/news.git'
+gem 'news', path: '~/RubymineProjects/News'
 
 ruby '2.1.5'
