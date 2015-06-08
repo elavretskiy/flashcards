@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   scope module: 'home' do
     resources :user_sessions, only: [:new, :create]
     resources :users, only: [:new, :create]
-    get 'login' => 'user_sessions#new', :as => :login
+    get 'login' => 'user_sessions#new', as: :login
 
     post 'oauth/callback' => 'oauths#callback'
     get 'oauth/callback' => 'oauths#callback'
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   scope module: 'dashboard' do
     resources :user_sessions, only: :destroy
     resources :users, only: :destroy
-    post 'logout' => 'user_sessions#destroy', :as => :logout
+    post 'logout' => 'user_sessions#destroy', as: :logout
 
     resources :cards do
       get 'get_flickr_images', on: :collection
