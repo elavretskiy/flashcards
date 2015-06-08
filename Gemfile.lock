@@ -23,6 +23,7 @@ PATH
       bootstrap-sass
       carrierwave
       ckeditor
+      http_accept_language
       jquery-rails
       kaminari
       mini_magick
