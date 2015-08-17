@@ -68,11 +68,8 @@ class Dashboard::CardsController < Dashboard::BaseController
   end
 
   def parsing_html
-    parse = CardsService.parsed_html?(current_user.id,
-                                      parsing_html_params[:block_id],
-                                      parsing_html_params[:url],
-                                      parsing_html_params[:css_original],
-                                      parsing_html_params[:css_translated])
+    parse = CardsParserService.schedule_parsing(current_user.id,
+                                                parsing_html_params)
 
     if parse
       flash.now[:notice] = 'Задача на парсинг сайта успешно поставлена в очередь.'
@@ -100,6 +97,7 @@ class Dashboard::CardsController < Dashboard::BaseController
   end
 
   def parsing_html_params
-    params.require(:parsing_html).permit(:block_id, :url, :css_original, :css_translated)
+    params.require(:parsing_html).permit(:block_id, :url, :origin_selector,
+                                         :translated_selector)
   end
 end

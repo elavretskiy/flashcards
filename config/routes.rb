@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  scope "(:locale)", locale: /#{I18n.locale}/ do
-    mount News::Engine => "/"
+  scope '(:locale)', locale: /#{I18n.locale}/ do
+    mount News::Engine => '/'
   end
 
   root 'main#index'

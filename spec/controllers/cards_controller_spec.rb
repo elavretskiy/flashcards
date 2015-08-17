@@ -13,8 +13,8 @@ describe Dashboard::CardsController do
                             parsing_html:
                               { block_id: @block.id,
                                 url: 'http://www.learnathome.ru/blog/100-beautiful-words',
-                                css_original: 'table tbody tr td[2] p',
-                                css_translated: 'table tbody tr td[1] p' }}
+                                origin_selector: 'table tbody tr td[2] p',
+                                translated_selector: 'table tbody tr td[1] p' }}
       expect(Delayed::Job.count).to eq(1)
       expect(flash[:notice]).to eq('Задача на парсинг сайта успешно поставлена в очередь.')
       expect(flash[:alert]).to eq(nil)
@@ -25,8 +25,8 @@ describe Dashboard::CardsController do
                             parsing_html:
                               { block_id: @block.id,
                                 url: 'http://www.learnathome.ru/blog/100-beautiful',
-                                css_original: 'table tbody tr td[2] p',
-                                css_translated: 'table tbody tr td[1] p' }}
+                                origin_selector: 'table tbody tr td[2] p',
+                                translated_selector: 'table tbody tr td[1] p' }}
       expect(Delayed::Job.count).to eq(0)
       expect(flash[:alert]).to eq('Проверьте правильность введенных данных.')
       expect(flash[:notice]).to eq(nil)
@@ -37,8 +37,8 @@ describe Dashboard::CardsController do
                             parsing_html:
                               { block_id: @block.id,
                                 url: 'http://www.learnathome.ru/blog/100-beautiful-words',
-                                css_original: 'table tbody',
-                                css_translated: 'table tbody tr td[1] p' }}
+                                origin_selector: 'table tbody',
+                                translated_selector: 'table tbody tr td[1] p' }}
       expect(Delayed::Job.count).to eq(0)
       expect(flash[:alert]).to eq('Проверьте правильность введенных данных.')
       expect(flash[:notice]).to eq(nil)
@@ -49,8 +49,8 @@ describe Dashboard::CardsController do
                             parsing_html:
                               { block_id: @block.id,
                                 url: 'http://www.learnathome.ru/blog/100-beautiful-words',
-                                css_original: 'table tbody tr td[2] p',
-                                css_translated: 'table tbody' }}
+                                origin_selector: 'table tbody tr td[2] p',
+                                translated_selector: 'table tbody' }}
       expect(Delayed::Job.count).to eq(0)
       expect(flash[:alert]).to eq('Проверьте правильность введенных данных.')
       expect(flash[:notice]).to eq(nil)
@@ -60,8 +60,8 @@ describe Dashboard::CardsController do
       post :parsing_html, { format: 'js',
                             parsing_html:
                               { url: 'http://www.learnathome.ru/blog/100-beautiful-words',
-                                css_original: 'table tbody tr td[2] p',
-                                css_translated: 'table tbody' }}
+                                origin_selector: 'table tbody tr td[2] p',
+                                translated_selector: 'table tbody' }}
       expect(Delayed::Job.count).to eq(0)
       expect(flash[:alert]).to eq('Проверьте правильность введенных данных.')
       expect(flash[:notice]).to eq(nil)
@@ -73,8 +73,8 @@ describe Dashboard::CardsController do
                             parsing_html:
                               { block_id: @block.id,
                                 url: 'http://www.learnathome.ru/blog/100-beautiful-words',
-                                css_original: 'table tbody tr td[2] p',
-                                css_translated: 'table tbody tr td[1] p' }}
+                                origin_selector: 'table tbody tr td[2] p',
+                                translated_selector: 'table tbody tr td[1] p' }}
       expect(Delayed::Job.count).to eq(0)
       expect(flash[:notice]).to eq('Задача на парсинг сайта успешно поставлена в очередь.')
       expect(flash[:alert]).to eq(nil)
