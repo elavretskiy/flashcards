@@ -4,7 +4,7 @@ class CardsParserService
       block_id = params[:block_id]
       return false unless block_id && user_id
 
-      get_text(params)
+      parse_html(params)
 
       return false unless @original.size == @translated.size && @original.any?
       return false if @original[0] == @translated[0]
@@ -13,7 +13,6 @@ class CardsParserService
       true
 
     rescue Exception
-      puts "OpenURI::HTTPError: 404 "
       return false
     end
 
@@ -26,7 +25,7 @@ class CardsParserService
       end
     end
 
-    def get_text(params)
+    def parse_html(params)
       html = Nokogiri::HTML(open(params[:url]))
       @original = html.css(params[:origin_selector]).map(&:content)
       @translated = html.css(params[:translated_selector]).map(&:content)
