@@ -19,7 +19,8 @@ describe Dashboard::CardsController do
                translated_selector: "table tbody tr td[1] p"
              }
       expect(Delayed::Job.count).to eq(1)
-      expect(flash[:notice]).to eq("Задача на парсинг сайта успешно поставлена в очередь.")
+      expect(flash[:notice]).to eq(\
+        "Задача на парсинг сайта успешно поставлена в очередь.")
       expect(flash[:alert]).to eq(nil)
     end
 
@@ -94,7 +95,8 @@ describe Dashboard::CardsController do
                translated_selector: "table tbody tr td[1] p"
              }
       expect(Delayed::Job.count).to eq(0)
-      expect(flash[:notice]).to eq("Задача на парсинг сайта успешно поставлена в очередь.")
+      expect(flash[:notice]).to eq(\
+        "Задача на парсинг сайта успешно поставлена в очередь.")
       expect(flash[:alert]).to eq(nil)
       expect(Card.exists?(original_text: "вода")).to eq(true)
       expect(Card.exists?(translated_text: "aqua")).to eq(true)
