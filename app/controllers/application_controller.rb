@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
 
   respond_to :html, :js
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to login_path, alert: exception.message
+  end
+
   private
 
   def set_locale

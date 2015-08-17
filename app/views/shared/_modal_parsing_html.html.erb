@@ -1,0 +1,67 @@
+<div class="modal fade" id="modal_parsing_html" tabindex="-1" role="dialog"
+     aria-labelledby="modal_parsing_html" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="modal-title">Парсинг HTML</h2>
+      </div>
+
+      <div class="modal-body">
+        <div id="modal_notice_block_parsing_html" class="row">
+        </div>
+
+        <%= form_tag main_app.parsing_html_cards_path, method: :post, remote: true do %>
+
+          <div class="form-group">
+            <%= label_tag '', 'Адрес сайта:',
+                          class: 'control-label' %>
+            <div class="modal_parsing_html_field_with_errors">
+              <%= text_field_tag 'parsing_html[url]', nil, class: 'form-control',
+                                 required: true, placeholder: 'Введите адреса сайта.' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag '', 'CSS селектор оригинала:',
+                          class: 'control-label' %>
+            <div class="modal_parsing_html_field_with_errors">
+              <%= text_field_tag 'parsing_html[origin_selector]', nil,
+                                 class: 'form-control', required: true,
+                                 placeholder: 'Введите CSS селектор оригинала.' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag '', 'CSS селектор перевода:',
+                          class: 'control-label' %>
+            <div class="modal_parsing_html_field_with_errors">
+              <%= text_field_tag 'parsing_html[translated_selector]', nil,
+                                 class: 'form-control', required: true,
+                                 placeholder: 'Введите CSS селектор перевода.' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag '', 'Колоды:',
+                          class: 'control-label' %>
+            <%= select_tag 'parsing_html[block_id]',
+                           options_for_select(current_user.blocks.all.order('title').collect{ |u| [u.title] }),
+                           prompt: 'Выберите колоду',
+                           class: 'form-control', required: true %>
+          </div>
+
+          <%= submit_tag 'Парсить', class: 'btn btn-primary', id: 'modal_parse_url' %>
+        <% end %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"
+                id="close_modal_parsing_html">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

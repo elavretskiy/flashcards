@@ -3,14 +3,16 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  mount News::Engine => "/news"
+  scope "(:locale)", locale: /#{I18n.locale}/ do
+    mount News::Engine => "/"
+  end
 
   root 'main#index'
 
   scope module: 'home' do
     resources :user_sessions, only: [:new, :create]
     resources :users, only: [:new, :create]
-    get 'login' => 'user_sessions#new', :as => :login
+    get 'login' => 'user_sessions#new', as: :login
 
     post 'oauth/callback' => 'oauths#callback'
     get 'oauth/callback' => 'oauths#callback'
@@ -20,10 +22,11 @@ Rails.application.routes.draw do
   scope module: 'dashboard' do
     resources :user_sessions, only: :destroy
     resources :users, only: :destroy
-    post 'logout' => 'user_sessions#destroy', :as => :logout
+    post 'logout' => 'user_sessions#destroy', as: :logout
 
     resources :cards do
       get 'get_flickr_images', on: :collection
+      post 'parsing_html', on: :collection
     end
 
     resources :blocks do

@@ -17,7 +17,7 @@ class Ability
       can :manage, Card
 
       can :manage, News::Article
-    elsif user.has_role? :newsmaker
+    elsif user.has_role? :news_maker
       can :manage, News::Article
     elsif user.has_role? :user
       can :read, News::Article

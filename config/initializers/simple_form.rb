@@ -78,7 +78,7 @@ SimpleForm.setup do |config|
   # config.error_notification_id = nil
 
   # Series of attempts to detect a default label method for collection.
-  # config.collection_label_methods = [ :to_label, :name, :title, :to_s ]
+  # config.collection_methods = [ :to, :name, :title, :to_s ]
 
   # Series of attempts to detect a default value method for collection.
   # config.collection_value_methods = [ :id, :to_s ]
@@ -98,7 +98,7 @@ SimpleForm.setup do |config|
   # config.item_wrapper_class = nil
 
   # How the label text should be generated altogether with the required text.
-  # config.label_text = lambda { |label, required, explicit_label| "#{required} #{label}" }
+  # config.label_text = lambda { |label, required, explicit| "#{required} #{label}" }
 
   # You can define the class to use on all labels. Default is nil.
   # config.label_class = nil
@@ -143,7 +143,7 @@ SimpleForm.setup do |config|
   # config.country_priority = nil
 
   # When false, do not use translations for labels.
-  # config.translate_labels = true
+  # config.translates = true
 
   # Automatically discover new inputs in Rails' autoload path.
   # config.inputs_discovery = true
@@ -155,7 +155,7 @@ SimpleForm.setup do |config|
   # config.input_class = nil
 
   # Define the default class of the input wrapper of the boolean input.
-  config.boolean_label_class = 'checkbox'
+  # config.boolean_class = 'checkbox'
 
   # Defines if the default input wrapper class should be included in radio
   # collection wrappers.

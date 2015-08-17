@@ -18,7 +18,11 @@
     <div class="col-sm-12">
       <%= yield %>
     </div>
+
     <%= render 'shared/modal_invite_friends' %>
+    <% if current_user %>
+      <%= render 'shared/modal_parsing_html' %>
+    <% end %>
   </div>
 </div>
 </body>

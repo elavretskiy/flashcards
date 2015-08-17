@@ -36,4 +36,8 @@ $(function(){
   $('#modal_invite_friends').on('shown.bs.modal', function() {
     $(this).find('textarea:first').focus();
   });
+
+  $('#modal_parsing_html').on('shown.bs.modal', function() {
+    $('#modal_parsing_html input:text').first().focus();
+  });
 });
